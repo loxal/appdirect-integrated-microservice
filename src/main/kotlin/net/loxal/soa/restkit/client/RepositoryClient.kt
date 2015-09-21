@@ -30,7 +30,7 @@ class RepositoryClient<T> : RestClient<T>() {
             authorizeRequest(targetProxy(explicitType(entityType)).path(id)).get()
 
     private fun targetProxy(entityType: String): WebTarget {
-        RestClient.LOG.info("tenant: $tenant | clientId: $clientId | appId: $appId")
+        RestClient.LOG.info("tenant: $tenant | clientId: $clientId | appId: $appId | bearer token: ${authorization.access_token}")
         return RestClient.CLIENT.target(repositoryServiceProxyUrl).path(tenant).path(appId).path(INFIX_PATH).path(entityType)
     }
 
