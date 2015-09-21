@@ -14,12 +14,11 @@ import java.net.URL
 import java.net.URLConnection
 import javax.ws.rs.GET
 import javax.ws.rs.Path
-import javax.ws.rs.PathParam
+import javax.ws.rs.QueryParam
 import javax.ws.rs.container.AsyncResponse
 import javax.ws.rs.container.ContainerRequestContext
 import javax.ws.rs.container.Suspended
 import javax.ws.rs.core.Context
-import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
 
 @Path(SubscriptionResource.RESOURCE_PATH)
@@ -27,27 +26,24 @@ class SubscriptionResource : Endpoint() {
 
     private var client: RepositoryClient<Any> = RepositoryClient()
 
-    @Path("create${Endpoint.URI_PATH_SEPARATOR}$NOTIFICATION_PATH_SUFFIX")
+    @Path("create")
     @GET
     fun create(
-            request: Any?,
+            @QueryParam("eventUrl") eventUrl: String?,
             @Context requestContext: ContainerRequestContext,
-            @PathParam("url") url: String?,
-            @PathParam("eventUrl") eventUrl: String?,
-            @PathParam("token") token: String?,
-            @Suspended asyncResponse: AsyncResponse): Response {
+            @Suspended asyncResponse: AsyncResponse) {
 
-        Endpoint.LOG.info("request = $request")
-        Endpoint.LOG.info("request123 = ${requestContext.mediaType}")
-        Endpoint.LOG.info("request123 = ${requestContext.propertyNames}")
-        requestContext.propertyNames.forEach { i -> Endpoint.LOG.info(i.toString()) }
-        Endpoint.LOG.info(url)
-        Endpoint.LOG.info(eventUrl)
-        Endpoint.LOG.info(token)
+        Endpoint.LOG.info("eventUrl: $eventUrl")
 
         signUrl()
 
-        return Response.status(Response.Status.OK).type(MediaType.APPLICATION_ATOM_XML_TYPE).build()
+        val subscriptionOrderCreated = SubscriptionOrderCreated()
+        println(subscriptionOrderCreated.success)
+        println(subscriptionOrderCreated.message)
+        println(subscriptionOrderCreated.accountIdentifier)
+        println(subscriptionOrderCreated.errorCode)
+
+        asyncResponse.resume(Response.status(Response.Status.CREATED).entity(subscriptionOrderCreated).build())
     }
 
     private fun signUrl() {
@@ -55,7 +51,7 @@ class SubscriptionResource : Endpoint() {
         val url1: URL = URL("https://www.appdirect.com/AppDirect/rest/api/events/dummyChange")
         val request: URLConnection = url1.openConnection()
         val httpRequest: HttpRequest = consumer.sign(request)
-        println(httpRequest)
+        //        println(httpRequest)
         request.connect()
 
 
@@ -63,30 +59,35 @@ class SubscriptionResource : Endpoint() {
         consumerSign.setSigningStrategy(QueryStringSigningStrategy())
         val url2: String = "https://www.appdirect.com/AppDirect/finishorder?success=true&accountIdentifer=Alice";
         val signedUrl = consumerSign.sign(url2);
-        println(signedUrl)
+        //        println(signedUrl)
     }
 
-    @Path("change${Endpoint.URI_PATH_SEPARATOR}$NOTIFICATION_PATH_SUFFIX")
+    @Path("change")
     @GET
-    fun change() {
+    fun change(@Suspended asyncResponse: AsyncResponse) {
         Endpoint.LOG.info("change get")
+
+        asyncResponse.resume(Response.status(Response.Status.OK).entity(SubscriptionOrderCreated()).build())
     }
 
-    @Path("cancel${Endpoint.URI_PATH_SEPARATOR}$NOTIFICATION_PATH_SUFFIX")
+    @Path("cancel")
     @GET
-    fun cancel() {
+    fun cancel(@Suspended asyncResponse: AsyncResponse) {
         Endpoint.LOG.info("cancel get")
+
+        asyncResponse.resume(Response.status(Response.Status.OK).entity(SubscriptionOrderCreated()).build())
     }
 
-    @Path("status${Endpoint.URI_PATH_SEPARATOR}$NOTIFICATION_PATH_SUFFIX")
+    @Path("status")
     @GET
-    fun status() {
+    fun status(@Suspended asyncResponse: AsyncResponse) {
         Endpoint.LOG.info("status get")
+
+        asyncResponse.resume(Response.status(Response.Status.OK).entity(SubscriptionOrderCreated()).build())
     }
 
     companion object {
         val APPDIRECT_ROOT_PATH = "appdirect"
         val RESOURCE_PATH = "$APPDIRECT_ROOT_PATH/subscription"
-        val NOTIFICATION_PATH_SUFFIX = "notification"
     }
 }
