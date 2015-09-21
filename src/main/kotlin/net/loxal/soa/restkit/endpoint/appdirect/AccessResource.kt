@@ -6,7 +6,6 @@ package net.loxal.soa.restkit.endpoint.appdirect
 
 import net.loxal.soa.restkit.client.RepositoryClient
 import net.loxal.soa.restkit.endpoint.Endpoint
-import net.loxal.soa.restkit.endpoint.SubscriptionResource
 import javax.ws.rs.GET
 import javax.ws.rs.Path
 import javax.ws.rs.PathParam
@@ -53,6 +52,6 @@ class AccessResource : Endpoint() {
 
 
     companion object {
-        val RESOURCE_PATH = "appdirect/user"
+        val RESOURCE_PATH = "${SubscriptionResource.APPDIRECT_ROOT_PATH}/user"
     }
 }
