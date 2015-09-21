@@ -8,10 +8,24 @@
 
 ## Who am I
 
-* Retrieves the IP address of your host
+* /who-am-i:
+    * Retrieves the IP address of the requesting host
 
 ## Getting Started
 
-1. Run __mvn jetty:run__
+1. Run WAR __mvn jetty:run__
 1. Call http://local.loxal.net:8200/application.wadl
 1. Try http://local.loxal.net:8200
+
+
+
+# Deploy & Release
+
+## Deploy to CloudFoundry
+
+* run `./release.sh` 
+
+## Deploy to Google App Engine 
+
+* edit `./release.sh` appropriately 
+* run `./release.sh`
