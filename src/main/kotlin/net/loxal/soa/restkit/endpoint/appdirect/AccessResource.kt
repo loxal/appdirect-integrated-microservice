@@ -13,7 +13,6 @@ import javax.ws.rs.container.AsyncResponse
 import javax.ws.rs.container.ContainerRequestContext
 import javax.ws.rs.container.Suspended
 import javax.ws.rs.core.Context
-import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
 
 @Path(AccessResource.RESOURCE_PATH)
@@ -29,11 +28,11 @@ class AccessResource : Endpoint() {
             @PathParam("url") url: String?,
             @PathParam("eventUrl") eventUrl: String?,
             @PathParam("token") token: String?,
-            @Suspended asyncResponse: AsyncResponse): Response {
+            @Suspended asyncResponse: AsyncResponse) {
         println("assign = $request")
 
 
-        return Response.status(Response.Status.OK).type(MediaType.APPLICATION_ATOM_XML_TYPE).build()
+        asyncResponse.resume(Response.ok(Subscription(message = "USER_ASSIGNMENT")).build())
     }
 
     @Path("unassign")
@@ -43,11 +42,11 @@ class AccessResource : Endpoint() {
                  @PathParam("url") url: String?,
                  @PathParam("eventUrl") eventUrl: String?,
                  @PathParam("token") token: String?,
-                 @Suspended asyncResponse: AsyncResponse): Response {
+                 @Suspended asyncResponse: AsyncResponse) {
 
         Endpoint.LOG.info("unassign")
 
-        return Response.status(Response.Status.CREATED).type(MediaType.APPLICATION_ATOM_XML_TYPE).build()
+        asyncResponse.resume(Response.ok(Subscription(message = "USER_UNASSIGNMENT")).build())
     }
 
 

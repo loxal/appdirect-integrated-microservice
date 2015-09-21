@@ -29,21 +29,45 @@ class SubscriptionResource : Endpoint() {
     @Path("create")
     @GET
     fun create(
-            @QueryParam("eventUrl") eventUrl: String?,
+            @QueryParam("url") url: String?,
             @Context requestContext: ContainerRequestContext,
             @Suspended asyncResponse: AsyncResponse) {
 
-        Endpoint.LOG.info("eventUrl: $eventUrl")
+        Endpoint.LOG.info("url: $url")
 
         signUrl()
 
-        val subscriptionOrderCreated = SubscriptionOrderCreated()
-        println(subscriptionOrderCreated.success)
-        println(subscriptionOrderCreated.message)
-        println(subscriptionOrderCreated.accountIdentifier)
-        println(subscriptionOrderCreated.errorCode)
+        val subscription = Subscription(message = Event.SUBSCRIPTION_ORDER.toString())
+        println(subscription.success)
+        println(subscription.message)
+        println(subscription.accountIdentifier)
+        println(subscription.errorCode)
 
-        asyncResponse.resume(Response.status(Response.Status.CREATED).entity(subscriptionOrderCreated).build())
+        asyncResponse.resume(Response.ok(subscription).build())
+    }
+
+    @Path("change")
+    @GET
+    fun change(@Suspended asyncResponse: AsyncResponse) {
+        Endpoint.LOG.info("change get")
+
+        asyncResponse.resume(Response.ok(Subscription(message = "SUBSCRIPTION_CHANGE")).build())
+    }
+
+    @Path("cancel")
+    @GET
+    fun cancel(@Suspended asyncResponse: AsyncResponse) {
+        Endpoint.LOG.info("cancel get")
+
+        asyncResponse.resume(Response.ok(Subscription(message = "SUBSCRIPTION_CANCEL")).build())
+    }
+
+    @Path("status")
+    @GET
+    fun status(@Suspended asyncResponse: AsyncResponse) {
+        Endpoint.LOG.info("status get")
+
+        asyncResponse.resume(Response.ok(Subscription(message = "SUBSCRIPTION_NOTICE")).build())
     }
 
     private fun signUrl() {
@@ -60,30 +84,6 @@ class SubscriptionResource : Endpoint() {
         val url2: String = "https://www.appdirect.com/AppDirect/finishorder?success=true&accountIdentifer=Alice";
         val signedUrl = consumerSign.sign(url2);
         //        println(signedUrl)
-    }
-
-    @Path("change")
-    @GET
-    fun change(@Suspended asyncResponse: AsyncResponse) {
-        Endpoint.LOG.info("change get")
-
-        asyncResponse.resume(Response.status(Response.Status.OK).entity(SubscriptionOrderCreated()).build())
-    }
-
-    @Path("cancel")
-    @GET
-    fun cancel(@Suspended asyncResponse: AsyncResponse) {
-        Endpoint.LOG.info("cancel get")
-
-        asyncResponse.resume(Response.status(Response.Status.OK).entity(SubscriptionOrderCreated()).build())
-    }
-
-    @Path("status")
-    @GET
-    fun status(@Suspended asyncResponse: AsyncResponse) {
-        Endpoint.LOG.info("status get")
-
-        asyncResponse.resume(Response.status(Response.Status.OK).entity(SubscriptionOrderCreated()).build())
     }
 
     companion object {

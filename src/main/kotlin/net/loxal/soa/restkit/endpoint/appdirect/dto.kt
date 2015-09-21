@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlElement
 import javax.xml.bind.annotation.XmlRootElement
 
 @XmlRootElement(name = "result")
-data class SubscriptionOrderCreated(
+data class Subscription(
         @XmlElement val success: Boolean = true,
         @XmlElement var accountIdentifier: String = "none",
         @XmlElement var message: String = "SUBSCRIPTION_ORDER",
@@ -27,4 +27,14 @@ enum class ErrorCode {
     INVALID_RESPONSE,
     UNKNOWN_ERROR,
     PENDING,
+}
+
+enum class Event {
+    SUBSCRIPTION_ORDER,
+    SUBSCRIPTION_CHANGE,
+    SUBSCRIPTION_CANCEL,
+    SUBSCRIPTION_NOTICE,
+
+    USER_ASSIGNMENT,
+    USER_UNASSIGNMENT,
 }
