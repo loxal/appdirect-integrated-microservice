@@ -9,9 +9,9 @@ import javax.xml.bind.annotation.XmlRootElement
 
 @XmlRootElement(name = "result")
 data class Subscription(
-        @XmlElement val success: Boolean = true,
-        @XmlElement var accountIdentifier: String = "none",
-        @XmlElement var message: String = "SUBSCRIPTION_ORDER",
+        @XmlElement var success: Boolean = true,
+        var accountIdentifier: String = "na",
+        @XmlElement var message: String = "",
         @XmlElement var errorCode: ErrorCode = ErrorCode.NONE
 )
 

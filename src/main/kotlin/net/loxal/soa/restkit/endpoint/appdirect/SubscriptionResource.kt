@@ -51,7 +51,7 @@ class SubscriptionResource : Endpoint() {
     fun change(@Suspended asyncResponse: AsyncResponse) {
         Endpoint.LOG.info("change get")
 
-        asyncResponse.resume(Response.ok(Subscription(message = "SUBSCRIPTION_CHANGE")).build())
+        asyncResponse.resume(Response.ok(Subscription(message = Event.SUBSCRIPTION_CHANGE.toString())).build())
     }
 
     @Path("cancel")
@@ -59,7 +59,7 @@ class SubscriptionResource : Endpoint() {
     fun cancel(@Suspended asyncResponse: AsyncResponse) {
         Endpoint.LOG.info("cancel get")
 
-        asyncResponse.resume(Response.ok(Subscription(message = "SUBSCRIPTION_CANCEL")).build())
+        asyncResponse.resume(Response.ok(Subscription(message = Event.SUBSCRIPTION_CANCEL.toString())).build())
     }
 
     @Path("status")
@@ -67,7 +67,17 @@ class SubscriptionResource : Endpoint() {
     fun status(@Suspended asyncResponse: AsyncResponse) {
         Endpoint.LOG.info("status get")
 
-        asyncResponse.resume(Response.ok(Subscription(message = "SUBSCRIPTION_NOTICE")).build())
+        asyncResponse.resume(Response.ok(Subscription(message = Event.SUBSCRIPTION_NOTICE.toString())).build())
+    }
+
+    @Path("custom")
+    @GET
+    fun custom(
+            @Context requestContext: ContainerRequestContext,
+            @Suspended asyncResponse: AsyncResponse
+    ) {
+
+        asyncResponse.resume(Response.ok(Subscription(message = "ADDON")).build())
     }
 
     private fun signUrl() {

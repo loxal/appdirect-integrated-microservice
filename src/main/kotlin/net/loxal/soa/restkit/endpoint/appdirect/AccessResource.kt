@@ -32,7 +32,7 @@ class AccessResource : Endpoint() {
         println("assign = $request")
 
 
-        asyncResponse.resume(Response.ok(Subscription(message = "USER_ASSIGNMENT")).build())
+        asyncResponse.resume(Response.ok(Subscription(message = Event.USER_ASSIGNMENT.toString())).build())
     }
 
     @Path("unassign")
@@ -46,7 +46,7 @@ class AccessResource : Endpoint() {
 
         Endpoint.LOG.info("unassign")
 
-        asyncResponse.resume(Response.ok(Subscription(message = "USER_UNASSIGNMENT")).build())
+        asyncResponse.resume(Response.ok(Subscription(message = Event.USER_UNASSIGNMENT.toString())).build())
     }
 
 
