@@ -40,7 +40,7 @@
         <repositoryServiceProxyUrl>https://api${proxy.domain.suffix}/hybris/document/b2</repositoryServiceProxyUrl>
         <app.clientId>${yaas.app.loxal.rest-kit.clientId}</app.clientId>
         <app.clientSecret>${yaas.app.loxal.rest-kit.clientSecret}</app.clientSecret>
-        <oAuth2ServiceUri>https://api${proxy.domain.suffix}/hybris/oauth2/b1/token</oAuth2ServiceUri>
+        <oAuth2ServiceUrl>https://api${proxy.domain.suffix}/hybris/oauth2/b1/token</oAuth2ServiceUrl>
 
         <deploymentTarget>http://${deployment.host.name}:${deployment.host.port}</deploymentTarget>
         <deployment.host.port>${local.jetty.port}</deployment.host.port>

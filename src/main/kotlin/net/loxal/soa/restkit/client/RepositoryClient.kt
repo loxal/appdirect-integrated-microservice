@@ -63,7 +63,7 @@ class RepositoryClient<T> : RestClient<T>() {
             newAuthorization = authorize()
             authorization = newAuthorization
 
-            RestClient.LOG.info("A new token ${authorization.access_token} has been fetched")
+            RestClient.LOG.info("A new bearer token ${authorization.access_token} has been fetched.")
         }
 
         final fun authorize(): Authorization {
@@ -75,7 +75,7 @@ class RepositoryClient<T> : RestClient<T>() {
 
             val tokenRequestForm = Form(tokenRequestBody)
 
-            val accessToken = RestClient.CLIENT.target(properties.getProperty("oAuth2ServiceUri"))
+            val accessToken = RestClient.CLIENT.target(properties.getProperty("oAuth2ServiceUrl"))
                     .request()
                     .post(Entity.form(tokenRequestForm))
 
