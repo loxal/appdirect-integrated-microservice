@@ -4,15 +4,14 @@
 
 package net.loxal.soa.restkit.endpoint.appdirect
 
-import javax.xml.bind.annotation.XmlElement
 import javax.xml.bind.annotation.XmlRootElement
 
 @XmlRootElement(name = "result")
 data class Subscription(
-        @XmlElement var success: Boolean = true,
-        var accountIdentifier: String = "na",
-        @XmlElement var message: String = "",
-        @XmlElement var errorCode: ErrorCode = ErrorCode.NONE
+        var success: Boolean = true,
+        var accountIdentifier: String = "alex",
+        var message: String = ""
+//        var errorCode: ErrorCode = ErrorCode.NONE
 )
 
 enum class ErrorCode {

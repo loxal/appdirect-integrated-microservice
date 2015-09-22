@@ -35,6 +35,9 @@
         <proxy.domain.suffix>.stage.yaas.io</proxy.domain.suffix>
         <build.number>0</build.number>
 
+        <appdirect.oauth.consumer.key>${appdirect.oauth.consumer.key}</appdirect.oauth.consumer.key>
+        <appdirect.oauth.consumer.secret>${appdirect.oauth.consumer.secret}</appdirect.oauth.consumer.secret>
+
         <tenant>muctool</tenant>
         <appId>loxal.rest-kit</appId>
         <repositoryServiceProxyUrl>https://api${proxy.domain.suffix}/hybris/document/b2</repositoryServiceProxyUrl>
