@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+  -->
+
+<!--<html manifest="cache.appcache">-->
+<meta charset="UTF-8">
+<link href="../favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+<title>Dilbert Quotes</title>
+
+<script>
+    "use strict";
+    function main() {
+        var quoteResourcePath = "programmer";
+        var configure = function () {
+            var roleContainer = document.getElementById("role");
+            var jsonOutput = document.getElementById("jsonOutput");
+
+            var config = JSON.parse(decodeURIComponent(window.location.search.substr(1)));
+            var role = config.role;
+            var quoteId = config.quoteId;
+
+            var enterprise = "enterprise";
+            var manager = "manager";
+            var programmer = "programmer";
+            quoteResourcePath = role;
+            switch (role) {
+                case enterprise:
+                    roleContainer.textContent = " Enterprises, Inc.";
+                    break;
+                case manager:
+                    roleContainer.textContent = ", the Manager";
+                    break;
+                case programmer:
+                    roleContainer.textContent = ", the Programmer";
+                    break;
+            }
+
+            if (quoteId) {
+                quoteResourcePath += "/" + quoteId;
+            }
+            jsonOutput.href = quoteResourcePath;
+        };
+
+        var loadQuote = function () {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var quote = JSON.parse(xhr.response);
+                    var quoteContainer = document.getElementById("quote");
+                    quoteContainer.textContent = quote.quote;
+                }
+            };
+            xhr.open("GET", quoteResourcePath, true);
+            xhr.send();
+        };
+
+        if (document.location.search) {
+            configure();
+        }
+        loadQuote();
+    }
+</script>
+
+<style type="text/css">
+    @import url(https://fonts.googleapis.com/css?family=Courgette|Playball);
+
+    #quoteFrame {
+        font-size: 40px;
+        text-align: center;
+        font-family: 'Courgette', cursive;
+        margin-top: 25%;
+    }
+
+    a {
+        text-decoration: none;
+        color: #ccc;
+    }
+
+    .quotationMarks {
+        font-size: 55px;
+    }
+</style>
+
+<body onload="main()">
+<div id="overview">
+    <a id="jsonOutput" href="programmer">JSON</a>
+    [
+    <a href="index.html?{&quot;role&quot;:&quot;enterprise&quot;}">Enterprise Environment Working Conditions</a> |
+    <a href="index.html?{&quot;role&quot;:&quot;manager&quot;}">Manager Quotes</a> |
+    <a href="index.html?{&quot;role&quot;:&quot;programmer&quot;}">Programmer Quotes</a>
+    ]
+</div>
+<div id="quoteFrame">
+    <strong>
+        <span class="quotationMarks">“</span><span id="quote"></span><span class="quotationMarks">”</span>
+    </strong>
+    <br/><br/>
+    <span style="font-size: 20px; float: right;">— Dilbert<span id="role">, the Programmer</span></span>
+</div>
+</body>
+

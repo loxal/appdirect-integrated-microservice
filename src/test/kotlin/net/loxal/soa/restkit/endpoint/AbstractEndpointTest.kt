@@ -1,0 +1,68 @@
+/*
+ * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ */
+
+package net.loxal.soa.restkit.endpoint
+
+import net.loxal.soa.restkit.filter.AccessControlFilter
+import org.junit.Test
+import org.slf4j.LoggerFactory
+import java.io.IOException
+import java.net.URI
+import java.util.*
+import javax.ws.rs.client.ClientBuilder
+import javax.ws.rs.client.WebTarget
+import javax.ws.rs.core.MediaType
+import javax.ws.rs.core.Response
+import kotlin.test.assertEquals
+
+abstract class AbstractEndpointTest {
+
+    @Test
+    fun nonExistentPathNotFound() {
+        val response = prepareGenericRequest(resourcePath).path(NON_EXISTENT).request().get()
+        LOG.info("resourcePath: $resourcePath")
+
+        assertEquals(Response.Status.NOT_FOUND.statusCode, response.status)
+        assertEquals(MediaType.APPLICATION_JSON_TYPE, response.mediaType)
+        assureCorsHeaders(response)
+    }
+
+    companion object {
+        val LOG = LoggerFactory.getLogger(AbstractEndpointTest::class.java)
+        val NON_EXISTENT: String = "non-existent"
+        val SERVICE_TARGET: String
+        private val client = ClientBuilder.newClient()
+        public var properties: Properties
+        var resourcePath: String = "/"
+
+        public fun prepareGenericRequest(path: String): WebTarget {
+            return prepareTarget(SERVICE_TARGET).path(path)
+        }
+
+        public fun prepareTarget(target: String): WebTarget {
+            return client.target(target)
+        }
+
+        public fun prepareTarget(target: URI): WebTarget {
+            return client.target(target)
+        }
+
+        init {
+            val classLoader = Thread.currentThread().contextClassLoader
+            properties = Properties()
+            try {
+                properties.load(classLoader.getResourceAsStream("local.properties"))
+            } catch (e: IOException) {
+                LOG.error("Impossible to load property file. \n ${e.getMessage()}")
+            }
+
+            SERVICE_TARGET = properties.getProperty("deploymentTarget")
+        }
+    }
+
+    private fun assureCorsHeaders(response: Response) {
+        assertEquals(AccessControlFilter.allowOriginHeaderValue, response.getHeaderString(AccessControlFilter.allowOriginHeader))
+        assertEquals(AccessControlFilter.allowHeadersValue.toString(), response.getHeaderString(AccessControlFilter.allowHeadersHeader).toString())
+    }
+}

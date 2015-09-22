@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "quote": "Instead getting notifications to update software, you receive notifications to suspend an update."
+  },
+  {
+    "id": 2,
+    "quote": "To unsubscribe from a newsletter there is no unsubscribe link. You need to create an e-mail filter rule."
+  },
+  {
+    "id": 3,
+    "quote": "To use a simple HR app, you need to start a virtual machine and boot into Windows."
+  },
+  {
+    "id": 4,
+    "quote": "A simple HR app crashes the only supported browser, the Internet Explorer every time when doing a common operation."
+  },
+  {
+    "id": 5,
+    "quote": "You are allowed to but cannot use Skype for technical reasons."
+  },
+  {
+    "id": 6,
+    "quote": "It takes days to resolve technical Skype issues."
+  },
+  {
+    "id": 7,
+    "quote": "You need to indicate your vacation in four different places."
+  },
+  {
+    "id": 8,
+    "quote": "You receive 100 e-mails per day and 99 of them have absolutely no relevance for you."
+  },
+  {
+    "id": 9,
+    "quote": "You receive an e-mail to download a license key from a Windows share for an internally purchased application."
+  },
+  {
+    "id": 10,
+    "quote": "You need to click “Edit” in order to reply to a ticket."
+  },
+  {
+    "id": 11,
+    "quote": "You need to decide using the corporate network or to do your actual job but you cannot do both."
+  },
+  {
+    "id": 12,
+    "quote": "You need to delete your browser cache and join a roll out session in order to use a marginally updated ticket system."
+  }
+]
