@@ -17,7 +17,7 @@
 1. Call http://local.loxal.net:8200/application.wadl
 1. Try http://local.loxal.net:8200
 
-## Demo
+## Demo Showcase
 
 * Demo Instance running on (private) CloudFoundry: https://rest-kit-v1.us-east.stage.internal.yaas.io/dilbert-quote/index.html
 
