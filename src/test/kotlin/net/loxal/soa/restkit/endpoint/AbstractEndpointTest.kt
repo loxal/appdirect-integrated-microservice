@@ -4,6 +4,8 @@
 
 package net.loxal.soa.restkit.endpoint
 
+import com.fasterxml.jackson.databind.DeserializationFeature
+import com.fasterxml.jackson.databind.ObjectMapper
 import net.loxal.soa.restkit.filter.AccessControlFilter
 import org.junit.Test
 import org.slf4j.LoggerFactory
@@ -33,6 +35,7 @@ abstract class AbstractEndpointTest {
         val NON_EXISTENT: String = "non-existent"
         val SERVICE_TARGET: String
         private val client = ClientBuilder.newClient()
+        private val mapper = ObjectMapper()
         public var properties: Properties
         var resourcePath: String = "/"
 
@@ -58,6 +61,9 @@ abstract class AbstractEndpointTest {
             }
 
             SERVICE_TARGET = properties.getProperty("deploymentTarget")
+
+            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+            client.register(mapper)
         }
     }
 

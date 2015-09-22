@@ -39,6 +39,8 @@ class RepositoryClient<T> : RestClient<T>() {
     private fun explicitType(entity: Class<in T>) = entity.simpleName.toLowerCase()
 
     companion object {
+        public val consumerKey: String
+        public val consumerSecret: String
         public val appId: String
         public val clientId: String
         val INFIX_PATH: String = "data"
@@ -54,6 +56,9 @@ class RepositoryClient<T> : RestClient<T>() {
             appId = properties.getProperty("appId")
             tenant = properties.getProperty("tenant")
             repositoryServiceProxyUrl = URI.create(properties.getProperty("repositoryServiceProxyUrl"))
+
+            consumerKey = properties.getProperty("appdirect.oauth.consumer.key")
+            consumerSecret = properties.getProperty("appdirect.oauth.consumer.secret")
 
             tokenRefresher.scheduleAtFixedRate(refreshToken(), 0, 3500, TimeUnit.SECONDS)
         }

@@ -8,7 +8,6 @@ import net.loxal.soa.restkit.client.RepositoryClient
 import net.loxal.soa.restkit.endpoint.Endpoint
 import javax.ws.rs.GET
 import javax.ws.rs.Path
-import javax.ws.rs.PathParam
 import javax.ws.rs.container.AsyncResponse
 import javax.ws.rs.container.ContainerRequestContext
 import javax.ws.rs.container.Suspended
@@ -23,32 +22,20 @@ class AccessResource : Endpoint() {
     @Path("assign")
     @GET
     fun assign(
-            request: Any?,
             @Context requestContext: ContainerRequestContext,
-            @PathParam("url") url: String?,
-            @PathParam("eventUrl") eventUrl: String?,
-            @PathParam("token") token: String?,
             @Suspended asyncResponse: AsyncResponse) {
-        println("assign = $request")
 
-
-        asyncResponse.resume(Response.ok(Subscription(message = Event.USER_ASSIGNMENT.toString())).build())
+        asyncResponse.resume(Response.ok(Result(message = EventType.USER_ASSIGNMENT.toString())).build())
     }
 
     @Path("unassign")
     @GET
-    fun unassign(request: Any?,
+    fun unassign(
                  @Context requestContext: ContainerRequestContext,
-                 @PathParam("url") url: String?,
-                 @PathParam("eventUrl") eventUrl: String?,
-                 @PathParam("token") token: String?,
                  @Suspended asyncResponse: AsyncResponse) {
 
-        Endpoint.LOG.info("unassign")
-
-        asyncResponse.resume(Response.ok(Subscription(message = Event.USER_UNASSIGNMENT.toString())).build())
+        asyncResponse.resume(Response.ok(Result(message = EventType.USER_UNASSIGNMENT.toString())).build())
     }
-
 
     companion object {
         val RESOURCE_PATH = "${SubscriptionResource.APPDIRECT_ROOT_PATH}/user"
