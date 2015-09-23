@@ -28,6 +28,8 @@ class SubscriptionResource : Endpoint() {
             @Context requestContext: ContainerRequestContext,
             @Suspended asyncResponse: AsyncResponse) {
 
+        // TODO verify OAuth signature
+
         asyncResponse.resume(Response.ok(Result(message = EventType.SUBSCRIPTION_ORDER.toString())).build())
     }
 
@@ -36,6 +38,8 @@ class SubscriptionResource : Endpoint() {
     fun change(
             @Context requestContext: ContainerRequestContext,
             @Suspended asyncResponse: AsyncResponse) {
+
+        // TODO verify OAuth signature
 
         asyncResponse.resume(Response.ok(Result(message = EventType.SUBSCRIPTION_CHANGE.toString())).build())
     }
@@ -46,6 +50,7 @@ class SubscriptionResource : Endpoint() {
             @Context requestContext: ContainerRequestContext,
             @Suspended asyncResponse: AsyncResponse) {
 
+        // TODO verify OAuth signature
 
         asyncResponse.resume(Response.ok(Result(message = EventType.SUBSCRIPTION_CANCEL.toString())).build())
     }
@@ -55,6 +60,8 @@ class SubscriptionResource : Endpoint() {
     fun status(
                @Context requestContext: ContainerRequestContext,
                @Suspended asyncResponse: AsyncResponse) {
+
+        // TODO verify OAuth signature
 
         asyncResponse.resume(Response.ok(Result(message = EventType.SUBSCRIPTION_NOTICE.toString())).build())
     }

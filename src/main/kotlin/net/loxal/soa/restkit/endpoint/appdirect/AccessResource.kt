@@ -25,6 +25,8 @@ class AccessResource : Endpoint() {
             @Context requestContext: ContainerRequestContext,
             @Suspended asyncResponse: AsyncResponse) {
 
+        // TODO verify OAuth signature
+
         asyncResponse.resume(Response.ok(Result(message = EventType.USER_ASSIGNMENT.toString())).build())
     }
 
@@ -33,6 +35,8 @@ class AccessResource : Endpoint() {
     fun unassign(
                  @Context requestContext: ContainerRequestContext,
                  @Suspended asyncResponse: AsyncResponse) {
+
+        // TODO verify OAuth signature
 
         asyncResponse.resume(Response.ok(Result(message = EventType.USER_UNASSIGNMENT.toString())).build())
     }
