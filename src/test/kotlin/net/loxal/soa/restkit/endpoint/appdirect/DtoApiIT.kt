@@ -12,6 +12,44 @@ import kotlin.test.assertEquals
 
 class DtoApiIT {
     @Test
+    fun checkDummyChange() {
+        val referenceDummyEvent = ChangeEvent(
+                type = EventType.SUBSCRIPTION_CHANGE,
+                returnUrl = URI.create("https://www.appdirect.com/finishprocure?token=dummyChange"),
+                marketplace = EventMarketplace(
+                        baseUrl = URI.create("https://acme.appdirect.com"),
+                        partner = "ACME"
+                ),
+                creator = EventCreator(
+                        email = "test-email+creator@appdirect.com",
+                        firstName = "DummyCreatorFirst",
+                        lastName = "DummyCreatorLast",
+                        language = "fr",
+                        openId = URI.create("https://www.appdirect.com/openid/id/ec5d8eda-5cec-444d-9e30-125b6e4b67e2"),
+                        uuid = "ec5d8eda-5cec-444d-9e30-125b6e4b67e2"
+                ),
+                payload = ChangeEventPayload(
+                        account = EventPayloadAccount(
+                                accountIdentifier = "dummy-account",
+                                status = "ACTIVE"
+                        ),
+                        configuration = EventPayloadConfiguration()
+                ),
+                flag = EventFlag.STATELESS
+        )
+
+        val dummyEventResponse = AbstractEndpointTest
+                .prepareTarget("${dummyEndpoint}dummyChange")
+                .request()
+                .get()
+
+        assertEquals(Response.Status.OK.statusCode, dummyEventResponse.status)
+        val dummyEvent = dummyEventResponse.readEntity(ChangeEvent::class.java)
+        AbstractEndpointTest.LOG.info(dummyEvent.toString())
+        assertEquals(referenceDummyEvent, dummyEvent)
+    }
+
+    @Test
     fun checkDummyOrder() {
         val referenceDummyOrder = Event(
                 type = EventType.SUBSCRIPTION_ORDER,
