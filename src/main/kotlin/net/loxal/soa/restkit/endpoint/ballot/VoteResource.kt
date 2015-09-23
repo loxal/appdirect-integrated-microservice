@@ -4,7 +4,7 @@
 
 package net.loxal.soa.restkit.endpoint.ballot
 
-import net.loxal.soa.restkit.client.RepositoryClient
+import net.loxal.soa.restkit.client.KitClient
 import net.loxal.soa.restkit.endpoint.Endpoint
 import net.loxal.soa.restkit.model.ballot.Vote
 import java.util.concurrent.TimeUnit
@@ -22,7 +22,7 @@ import javax.ws.rs.core.Response
 @Path(VoteResource.RESOURCE_PATH)
 class VoteResource : Endpoint() {
 
-    private var client: RepositoryClient<Vote> = RepositoryClient()
+    private var client: KitClient<Vote> = KitClient()
 
     @Path(Endpoint.ID_PATH_PARAM_PLACEHOLDER)
     @POST

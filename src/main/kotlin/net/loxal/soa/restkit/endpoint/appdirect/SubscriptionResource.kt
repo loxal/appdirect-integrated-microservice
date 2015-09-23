@@ -4,7 +4,7 @@
 
 package net.loxal.soa.restkit.endpoint.appdirect
 
-import net.loxal.soa.restkit.client.RepositoryClient
+import net.loxal.soa.restkit.client.KitClient
 import net.loxal.soa.restkit.endpoint.Endpoint
 import oauth.signpost.OAuthConsumer
 import oauth.signpost.basic.DefaultOAuthConsumer
@@ -20,7 +20,7 @@ import javax.ws.rs.core.Response
 @Path(SubscriptionResource.RESOURCE_PATH)
 class SubscriptionResource : Endpoint() {
 
-    private var client: RepositoryClient<Any> = RepositoryClient()
+    private var client: KitClient<Any> = KitClient()
 
     @Path("create")
     @GET
@@ -93,7 +93,7 @@ class SubscriptionResource : Endpoint() {
     }
 
     private fun signUrl() {
-        val consumer: OAuthConsumer = DefaultOAuthConsumer(RepositoryClient.consumerKey, RepositoryClient.consumerSecret)
+        val consumer: OAuthConsumer = DefaultOAuthConsumer(KitClient.consumerKey, KitClient.consumerSecret)
     }
 
     companion object {

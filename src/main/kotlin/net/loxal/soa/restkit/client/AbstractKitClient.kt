@@ -12,11 +12,11 @@ import javax.ws.rs.client.WebTarget
 import javax.ws.rs.core.HttpHeaders
 import javax.ws.rs.core.Response
 
-abstract class RestClient<out T> protected constructor() {
+abstract class AbstractKitClient<out T> protected constructor() {
 
     fun targetTenant(webTarget: WebTarget): Invocation.Builder = webTarget.request()
 
-    fun applyToken(request: Invocation.Builder): Invocation.Builder = request.header(HttpHeaders.AUTHORIZATION, "Bearer ${RepositoryClient.authorization.access_token}")
+    fun applyToken(request: Invocation.Builder): Invocation.Builder = request.header(HttpHeaders.AUTHORIZATION, "Bearer ${KitClient.authorization.access_token}")
 
     fun authorizeRequest(target: WebTarget): Invocation.Builder = applyToken(targetTenant(target))
 
@@ -29,7 +29,7 @@ abstract class RestClient<out T> protected constructor() {
     abstract fun put(json: Entity<in T>, id: String): Response
 
     companion object {
-        val LOG = LoggerFactory.getLogger(RestClient::class.java)
+        val LOG = LoggerFactory.getLogger(AbstractKitClient::class.java)
         val CLIENT = ClientBuilder.newClient()
     }
 }

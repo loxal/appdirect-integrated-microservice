@@ -4,7 +4,7 @@
 
 package net.loxal.soa.restkit.endpoint.appdirect
 
-import net.loxal.soa.restkit.client.RepositoryClient
+import net.loxal.soa.restkit.client.KitClient
 import net.loxal.soa.restkit.endpoint.Endpoint
 import javax.ws.rs.GET
 import javax.ws.rs.Path
@@ -17,7 +17,7 @@ import javax.ws.rs.core.Response
 @Path(AccessResource.RESOURCE_PATH)
 class AccessResource : Endpoint() {
 
-    private var client: RepositoryClient<Any> = RepositoryClient()
+    private var client: KitClient<Any> = KitClient()
 
     @Path("assign")
     @GET

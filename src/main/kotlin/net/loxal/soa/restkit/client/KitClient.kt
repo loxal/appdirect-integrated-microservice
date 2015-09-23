@@ -15,7 +15,7 @@ import javax.ws.rs.client.WebTarget
 import javax.ws.rs.core.Form
 import javax.ws.rs.core.MultivaluedHashMap
 
-class RepositoryClient<T> : RestClient<T>() {
+class KitClient<T> : AbstractKitClient<T>() {
 
     override fun post(entity: Entity<in T>, id: String) =
             authorizeRequest(targetProxy(explicitType(entity)).path(id)).post(entity)
@@ -30,8 +30,8 @@ class RepositoryClient<T> : RestClient<T>() {
             authorizeRequest(targetProxy(explicitType(entityType)).path(id)).get()
 
     private fun targetProxy(entityType: String): WebTarget {
-        RestClient.LOG.info("tenant: $tenant | clientId: $clientId | appId: $appId | bearer token: ${authorization.access_token}")
-        return RestClient.CLIENT.target(repositoryServiceProxyUrl).path(tenant).path(appId).path(INFIX_PATH).path(entityType)
+        AbstractKitClient.LOG.info("tenant: $tenant | clientId: $clientId | appId: $appId | bearer token: ${authorization.access_token}")
+        return AbstractKitClient.CLIENT.target(repositoryServiceProxyUrl).path(tenant).path(appId).path(INFIX_PATH).path(entityType)
     }
 
     private fun explicitType(entity: Entity<in T>) = entity.entity!!.javaClass.simpleName.toLowerCase()
@@ -51,7 +51,7 @@ class RepositoryClient<T> : RestClient<T>() {
         val tenant: String
 
         init {
-            properties.load(RepositoryClient::class.java.getResourceAsStream("/local.properties"))
+            properties.load(KitClient::class.java.getResourceAsStream("/local.properties"))
             clientId = properties.getProperty("app.clientId")
             appId = properties.getProperty("appId")
             tenant = properties.getProperty("tenant")
@@ -68,7 +68,7 @@ class RepositoryClient<T> : RestClient<T>() {
             newAuthorization = authorize()
             authorization = newAuthorization
 
-            RestClient.LOG.info("A new bearer token ${authorization.access_token} has been fetched.")
+            AbstractKitClient.LOG.info("A new bearer token ${authorization.access_token} has been fetched.")
         }
 
         final fun authorize(): Authorization {
@@ -80,7 +80,7 @@ class RepositoryClient<T> : RestClient<T>() {
 
             val tokenRequestForm = Form(tokenRequestBody)
 
-            val accessToken = RestClient.CLIENT.target(properties.getProperty("oAuth2ServiceUrl"))
+            val accessToken = AbstractKitClient.CLIENT.target(properties.getProperty("oAuth2ServiceUrl"))
                     .request()
                     .post(Entity.form(tokenRequestForm))
 
