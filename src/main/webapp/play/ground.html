@@ -3,9 +3,74 @@
   ~ Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
   -->
 
+<meta charset="UTF-8">
 <title>Playground</title>
+
+<script>
+    "use strict";
+    function openIdSignIn() {
+        var openIdSignInTrigger = document.getElementById("openIdSignInTrigger");
+
+        var load = function () {
+            var openIdSignIn = openIdSignInTrigger.title;
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var openIdInfo = JSON.parse(xhr.response);
+                    console.log(openIdInfo);
+                } else {
+                    console.log("failed");
+                    console.log(xhr.response);
+                    console.log(xhr);
+                    console.log(openIdSignIn);
+                }
+            };
+            xhr.open("GET", openIdSignIn, true);
+            xhr.send();
+        };
+        load();
+    }
+
+    function main() {
+        var configure = function () {
+            var openIdSignInLink = document.getElementById("openIdSignInLink");
+            var openIdSignInTrigger = document.getElementById("openIdSignInTrigger");
+        };
+
+        var load = function () {
+            var origin = document.location.origin;
+            var openIdAuthentication = origin + "/authentication/openid?url=https://www.appdirect.com/openid/id&returnToUrl=" + origin + "/authentication";
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var openIdInfo = JSON.parse(xhr.response);
+                    openIdSignInLink.href = openIdInfo.signInUrl;
+                    openIdSignInTrigger.title = openIdInfo.signInUrl;
+                }
+            };
+            xhr.open("GET", openIdAuthentication, true);
+            xhr.send();
+        };
+
+        configure();
+        load();
+    }
+</script>
+
+<body onload="main()">
 <h1>Playground</h1>
 
 <h2>Authentication</h2>
-<a href="https://rest-kit-v1.us-east.stage.internal.yaas.io/authentication/openid?url=https://www.appdirect.com/openid/id&returnToUrl=https://rest-kit-v1.us-east.stage.internal.yaas.io/play/ground.html">Sign-in
-  with AppDirect, using OpenID 2.0</a>
+<ul>
+    <li>
+        <a id="openIdSignInLink">
+            Sign-in with AppDirect, using OpenID 2.0
+        </a>
+    </li>
+    <li>
+        <button id="openIdSignInTrigger" onclick="openIdSignIn()">
+            Sign-in with AppDirect, using OpenID 2.0
+        </button>
+    </li>
+</ul>
+</body>

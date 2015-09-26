@@ -36,7 +36,7 @@ class OpenIdAuthentication : Endpoint() {
             responseParameters.set(Parameter(it.key, it.value.first()))
         }
 
-        var verification: VerificationResult = openIdConsumer.verify(
+        val verification: VerificationResult = openIdConsumer.verify(
                 req.uriInfo.requestUri.toString(),
                 responseParameters,
                 endpointAssociation
@@ -62,10 +62,12 @@ class OpenIdAuthentication : Endpoint() {
 
         val authReq: AuthRequest = openIdConsumer.authenticate(endpointAssociation, returnToUrl.toString())
 
-        println("authReq.getDestinationUrl(false) = ${authReq.getDestinationUrl(false)}")
+        Endpoint.LOG.info("authReq.getDestinationUrl(false) = ${authReq.getDestinationUrl(false)}")
         val signInUrl: URL = URL(authReq.getDestinationUrl(true))
-        Endpoint.LOG.info("Login: $signInUrl")
-        asyncResponse.resume(Response.ok().location(signInUrl.toURI()).build())
+        Endpoint.LOG.info("signInUrl: $signInUrl")
+        val openIdInfo = OpenIdInfo(url = url, returnToUrl = returnToUrl, signInUrl = signInUrl)
+
+        asyncResponse.resume(Response.ok(openIdInfo).location(signInUrl.toURI()).build())
     }
 
     companion object {
