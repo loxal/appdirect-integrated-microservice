@@ -13,15 +13,15 @@
 
     function openIdSignIn() {
         var load = function () {
-            console.log(openIdAuthenticated);
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
+                console.log(xhr.readyState);
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     var openIdInfo = JSON.parse(xhr.response);
                     console.log("ok");
                 } else {
                     console.log("failed");
-                    console.log(xhr.status);
+                    console.log(openIdAuthenticated);
                 }
             };
             xhr.open("GET", openIdAuthenticated, true);
@@ -37,7 +37,7 @@
 
         var load = function () {
             var origin = document.location.origin;
-            var openIdSignInUrl = origin + "/authentication/openid?url=https://www.appdirect.com/openid/id&returnToUrl=" + origin + "/authentication";
+            var openIdSignInUrl = origin + "/authentication/openid?url=https://www.appdirect.com/openid/id&returnToUrl=" + origin + "/play/ground.html";
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
@@ -52,6 +52,15 @@
 
         configure();
         load();
+        var showOpenIdInfo = function () {
+            var openIdInfo = document.getElementById("openIdInfo");
+            if (document.location.search === "") {
+                openIdInfo.textContent = "Not Authenticated";
+            } else {
+                openIdInfo.textContent = document.location.search;
+            }
+        };
+        showOpenIdInfo();
     }
 </script>
 
@@ -65,10 +74,11 @@
             Sign-in with AppDirect, using OpenID 2.0
         </a>
     </li>
-    <li>
-        <button id="openIdSignInTrigger" onclick="openIdSignIn()">
-            Sign-in with AppDirect, using OpenID 2.0
-        </button>
-    </li>
+    <!--<li>-->
+    <!--<button id="openIdSignInTrigger" onclick="openIdSignIn()">-->
+    <!--Sign-in with AppDirect, using OpenID 2.0-->
+    <!--</button>-->
+    <!--</li>-->
 </ul>
+<div id="openIdInfo"></div>
 </body>

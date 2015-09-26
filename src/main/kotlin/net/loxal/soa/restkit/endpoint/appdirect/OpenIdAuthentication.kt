@@ -45,7 +45,6 @@ class OpenIdAuthentication : Endpoint() {
         if (verification.verifiedId.identifier == null) {
             asyncResponse.resume(Response.status(Response.Status.UNAUTHORIZED).build())
         } else {
-            Endpoint.LOG.info(verification.verifiedId.identifier)
             asyncResponse.resume(Response.ok(URI.create(verification.verifiedId.identifier)).build())
         }
     }
@@ -62,9 +61,7 @@ class OpenIdAuthentication : Endpoint() {
 
         val authReq: AuthRequest = openIdConsumer.authenticate(endpointAssociation, returnToUrl.toString())
 
-        Endpoint.LOG.info("authReq.getDestinationUrl(false) = ${authReq.getDestinationUrl(false)}")
         val signInUrl: URL = URL(authReq.getDestinationUrl(true))
-        Endpoint.LOG.info("signInUrl: $signInUrl")
         val openIdInfo = OpenIdInfo(url = url, returnToUrl = returnToUrl, signInUrl = signInUrl)
 
         asyncResponse.resume(Response.ok(openIdInfo).location(signInUrl.toURI()).build())
