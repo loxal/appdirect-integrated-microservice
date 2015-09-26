@@ -56,8 +56,8 @@
     <dependencies>
         <dependency>
             <groupId>org.openid4java</groupId>
-            <artifactId>openid4java-server</artifactId>
-            <version>0.9.6</version>
+            <artifactId>openid4java-consumer</artifactId>
+            <version>0.9.5</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

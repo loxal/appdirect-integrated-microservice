@@ -9,9 +9,7 @@ import net.loxal.soa.restkit.endpoint.Endpoint
 import javax.ws.rs.GET
 import javax.ws.rs.Path
 import javax.ws.rs.container.AsyncResponse
-import javax.ws.rs.container.ContainerRequestContext
 import javax.ws.rs.container.Suspended
-import javax.ws.rs.core.Context
 import javax.ws.rs.core.Response
 
 @Path(AccessResource.RESOURCE_PATH)
@@ -22,7 +20,7 @@ class AccessResource : Endpoint() {
     @Path("assign")
     @GET
     fun assign(
-            @Context requestContext: ContainerRequestContext,
+            //            @Context requestContext: ContainerRequestContext,
             @Suspended asyncResponse: AsyncResponse) {
 
         // TODO verify OAuth signature
@@ -33,7 +31,7 @@ class AccessResource : Endpoint() {
     @Path("unassign")
     @GET
     fun unassign(
-                 @Context requestContext: ContainerRequestContext,
+            //                 @Context requestContext: ContainerRequestContext,
                  @Suspended asyncResponse: AsyncResponse) {
 
         // TODO verify OAuth signature

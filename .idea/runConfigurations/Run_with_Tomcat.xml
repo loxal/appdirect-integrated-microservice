@@ -5,7 +5,6 @@
     <option name="COMMON_VM_ARGUMENTS" value="-Djava.awt.headless=true -Duser.timezone=GMT -Dfile.encoding=UTF-8" />
     <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
     <option name="SHOW_DIALOG_ON_UPDATE" value="false" />
-    <option name="UPDATING_POLICY" value="restart-server" />
     <deployment>
       <artifact name="RESTkit:war exploded">
         <settings>
