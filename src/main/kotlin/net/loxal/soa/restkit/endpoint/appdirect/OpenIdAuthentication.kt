@@ -27,7 +27,7 @@ import javax.ws.rs.core.Response
 class OpenIdAuthentication : Endpoint() {
 
     @GET
-    fun authenticate(
+    fun verify(
             @Context req: ContainerRequestContext,
             @Suspended asyncResponse: AsyncResponse
     ) {
@@ -52,18 +52,17 @@ class OpenIdAuthentication : Endpoint() {
 
     @Path("openid")
     @GET
-    fun openid(
+    fun authenticate(
             @QueryParam("url") url: URL,
             @NotNull @QueryParam("returnToUrl") returnToUrl: URL,
             @Suspended asyncResponse: AsyncResponse
     ) {
-        //        http://localhost:8200/authentication/openid?url=https://www.appdirect.com/openid/id&returnToPath=http://localhost:8200/play/ground.html
-
         val idDiscoveries = openIdConsumer.discover(url.toString())
         endpointAssociation = openIdConsumer.associate(idDiscoveries)
 
         val authReq: AuthRequest = openIdConsumer.authenticate(endpointAssociation, returnToUrl.toString())
 
+        println("authReq.getDestinationUrl(false) = ${authReq.getDestinationUrl(false)}")
         val signInUrl: URL = URL(authReq.getDestinationUrl(true))
         Endpoint.LOG.info("Login: $signInUrl")
         asyncResponse.resume(Response.ok().location(signInUrl.toURI()).build())
