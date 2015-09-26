@@ -8,24 +8,23 @@
 
 <script>
     "use strict";
-    function openIdSignIn() {
-        var openIdSignInTrigger = document.getElementById("openIdSignInTrigger");
+    var openIdSignInTrigger = document.getElementById("openIdSignInTrigger");
+    var openIdAuthenticated;
 
+    function openIdSignIn() {
         var load = function () {
-            var openIdSignIn = openIdSignInTrigger.title;
+            console.log(openIdAuthenticated);
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     var openIdInfo = JSON.parse(xhr.response);
-                    console.log(openIdInfo);
+                    console.log("ok");
                 } else {
                     console.log("failed");
-                    console.log(xhr.response);
-                    console.log(xhr);
-                    console.log(openIdSignIn);
+                    console.log(xhr.status);
                 }
             };
-            xhr.open("GET", openIdSignIn, true);
+            xhr.open("GET", openIdAuthenticated, true);
             xhr.send();
         };
         load();
@@ -34,21 +33,20 @@
     function main() {
         var configure = function () {
             var openIdSignInLink = document.getElementById("openIdSignInLink");
-            var openIdSignInTrigger = document.getElementById("openIdSignInTrigger");
         };
 
         var load = function () {
             var origin = document.location.origin;
-            var openIdAuthentication = origin + "/authentication/openid?url=https://www.appdirect.com/openid/id&returnToUrl=" + origin + "/authentication";
+            var openIdSignInUrl = origin + "/authentication/openid?url=https://www.appdirect.com/openid/id&returnToUrl=" + origin + "/authentication";
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     var openIdInfo = JSON.parse(xhr.response);
                     openIdSignInLink.href = openIdInfo.signInUrl;
-                    openIdSignInTrigger.title = openIdInfo.signInUrl;
+                    openIdAuthenticated = openIdInfo.signInUrl;
                 }
             };
-            xhr.open("GET", openIdAuthentication, true);
+            xhr.open("GET", openIdSignInUrl, true);
             xhr.send();
         };
 

@@ -1,10 +1,11 @@
 # Services & Endpoints
 
 ## Quotation Endpoint
-* Browser client: /dilbert-quote/index.html
-* Endpoint for enterprise environment working condition quotations: /dilbert-quote/enterprise
-* Endpoint for manager quotations: /dilbert-quote/manager
-* Endpoint for programmer quotations: /dilbert-quote/programmer
+* Browser client: `/dilbert-quote/index.html`
+* Endpoint for enterprise environment working condition quotations: `/dilbert-quote/enterprise`
+* Endpoint for manager quotations: `/dilbert-quote/manager`
+* Endpoint for programmer quotations: `/dilbert-quote/programmer`
+* OpenID authentication: `/play/ground.html`
 
 ## Who am I
 
@@ -19,7 +20,8 @@
 
 ## Demo Showcase
 
-* Demo Instance running on (private) CloudFoundry: https://rest-kit-v1.us-east.stage.internal.yaas.io/dilbert-quote/index.html
+* Demo Instance running on (private) CloudFoundry
+    * https://rest-kit-v1.us-east.stage.internal.yaas.io/dilbert-quote/index.html
 
 # Deploy & Release
 

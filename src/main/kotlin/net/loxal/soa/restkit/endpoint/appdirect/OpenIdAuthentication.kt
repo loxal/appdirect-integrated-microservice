@@ -43,10 +43,10 @@ class OpenIdAuthentication : Endpoint() {
         )
 
         if (verification.verifiedId.identifier == null) {
-            asyncResponse.resume(Response.status(Response.Status.NOT_ACCEPTABLE).build())
+            asyncResponse.resume(Response.status(Response.Status.UNAUTHORIZED).build())
         } else {
             Endpoint.LOG.info(verification.verifiedId.identifier)
-            asyncResponse.resume(Response.created(URI.create(verification.verifiedId.identifier)).build())
+            asyncResponse.resume(Response.ok(URI.create(verification.verifiedId.identifier)).build())
         }
     }
 
