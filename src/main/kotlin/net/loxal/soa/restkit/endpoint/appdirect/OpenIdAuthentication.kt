@@ -13,6 +13,7 @@ import org.openid4java.message.Parameter
 import org.openid4java.message.ParameterList
 import java.net.URI
 import java.net.URL
+import javax.validation.constraints.NotNull
 import javax.ws.rs.GET
 import javax.ws.rs.Path
 import javax.ws.rs.QueryParam
@@ -22,8 +23,8 @@ import javax.ws.rs.container.Suspended
 import javax.ws.rs.core.Context
 import javax.ws.rs.core.Response
 
-@Path(OpenIdAuth.RESOURCE_PATH)
-class OpenIdAuth : Endpoint() {
+@Path(OpenIdAuthentication.RESOURCE_PATH)
+class OpenIdAuthentication : Endpoint() {
 
     @GET
     fun authenticate(
@@ -51,28 +52,26 @@ class OpenIdAuth : Endpoint() {
 
     @Path("openid")
     @GET
-    fun init(
+    fun openid(
             @QueryParam("url") url: URL,
-            @Context req: ContainerRequestContext,
+            @NotNull @QueryParam("returnToUrl") returnToUrl: URL,
             @Suspended asyncResponse: AsyncResponse
     ) {
-        //        http://localhost:8200/authentication/openid?url=https://www.appdirect.com/openid/id
+        //        http://localhost:8200/authentication/openid?url=https://www.appdirect.com/openid/id&returnToPath=http://localhost:8200/play/ground.html
 
         val idDiscoveries = openIdConsumer.discover(url.toString())
         endpointAssociation = openIdConsumer.associate(idDiscoveries)
 
-        println(req.uriInfo.baseUri)
         val authReq: AuthRequest = openIdConsumer.authenticate(endpointAssociation, returnToUrl.toString())
 
-        Endpoint.LOG.info("Login: ${authReq.getDestinationUrl(true)}")
-
-        asyncResponse.resume(Response.ok().build())
+        val signInUrl: URL = URL(authReq.getDestinationUrl(true))
+        Endpoint.LOG.info("Login: $signInUrl")
+        asyncResponse.resume(Response.ok().location(signInUrl.toURI()).build())
     }
 
     companion object {
         val RESOURCE_PATH = "authentication"
 
-        private val returnToUrl: URL = URL("http://localhost:8200/$RESOURCE_PATH")
         private val openIdConsumer: ConsumerManager = ConsumerManager()
         lateinit var endpointAssociation: DiscoveryInformation
     }
