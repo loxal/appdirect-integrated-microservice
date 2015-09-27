@@ -88,7 +88,7 @@ class GroupResourceIT : AbstractEndpointTest() {
 
     private fun validateError(error: Response) {
         val notFoundError = error.readEntity(ErrorMessage::class.java)
-        assertEquals(Response.Status.BAD_REQUEST.reasonPhrase, notFoundError.type)
+        assertEquals(Response.Status.BAD_REQUEST.reasonPhrase, notFoundError.reasonPhrase)
     }
 
     @Test

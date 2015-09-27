@@ -12,25 +12,18 @@ import javax.ws.rs.core.Response
 /**
  * Detailed error message used in response to provide all errors triggered by a request.
  */
-data class ErrorMessage private constructor() {
+data class ErrorMessage(
+        @NotNull val status: Response.Status = Response.Status.BAD_REQUEST
+) {
     @NotNull
-    var type: String? = Response.Status.BAD_REQUEST.reasonPhrase
+    val reasonPhrase: String = status.reasonPhrase
     @NotNull
     @Min(value = 100)
     @Max(value = 599)
-    var status: Int = 0
+    var statusCode: Int = status.statusCode
     var message: String? = ""
     var moreInfo: String = ""
     var details: Set<ErrorDetail> = emptySet()
-
-    companion object {
-        fun create(errorMsg: String?): ErrorMessage {
-            val e = ErrorMessage()
-            e.type = errorMsg
-
-            return e
-        }
-    }
 }
 
 data class ErrorDetail private constructor() {
