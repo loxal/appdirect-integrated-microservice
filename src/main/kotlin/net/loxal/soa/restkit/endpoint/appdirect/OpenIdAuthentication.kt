@@ -42,10 +42,13 @@ class OpenIdAuthentication : Endpoint() {
                 endpointAssociation
         )
 
-        if (verification.verifiedId.identifier == null) {
+        Endpoint.LOG.info("openid.return_to: ${req.uriInfo.queryParameters["openid.return_to"]}")
+        if (verification.verifiedId?.identifier == null) {
             asyncResponse.resume(Response.status(Response.Status.UNAUTHORIZED).build())
         } else {
-            asyncResponse.resume(Response.ok(URI.create(verification.verifiedId.identifier)).build())
+            Endpoint.LOG.info("requestUri: ${req.uriInfo.requestUri}")
+            val redirection = "${req.uriInfo.baseUri}$clientRedirectionPath?openid.id=${verification.verifiedId.identifier}"
+            asyncResponse.resume(Response.temporaryRedirect(URI.create(redirection)).build())
         }
     }
 
@@ -63,13 +66,14 @@ class OpenIdAuthentication : Endpoint() {
 
         val signInUrl: URL = URL(authReq.getDestinationUrl(true))
         val openIdInfo = OpenIdInfo(url = url, returnToUrl = returnToUrl, signInUrl = signInUrl)
-
+        Endpoint.LOG.info("signInUrl: $signInUrl")
         asyncResponse.resume(Response.ok(openIdInfo).location(signInUrl.toURI()).build())
     }
 
     companion object {
         val RESOURCE_PATH = "authentication"
 
+        private val clientRedirectionPath = "play/ground.html"
         private val openIdConsumer: ConsumerManager = ConsumerManager()
         lateinit var endpointAssociation: DiscoveryInformation
     }

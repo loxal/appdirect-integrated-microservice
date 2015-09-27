@@ -9,26 +9,6 @@
 <script>
     "use strict";
     var openIdSignInTrigger = document.getElementById("openIdSignInTrigger");
-    var openIdAuthenticated;
-
-    function openIdSignIn() {
-        var load = function () {
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                console.log(xhr.readyState);
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    var openIdInfo = JSON.parse(xhr.response);
-                    console.log("ok");
-                } else {
-                    console.log("failed");
-                    console.log(openIdAuthenticated);
-                }
-            };
-            xhr.open("GET", openIdAuthenticated, true);
-            xhr.send();
-        };
-        load();
-    }
 
     function main() {
         var configure = function () {
@@ -37,13 +17,12 @@
 
         var load = function () {
             var origin = document.location.origin;
-            var openIdSignInUrl = origin + "/authentication/openid?url=https://www.appdirect.com/openid/id&returnToUrl=" + origin + "/play/ground.html";
+            var openIdSignInUrl = origin + "/authentication/openid?url=https://www.appdirect.com/openid/id&returnToUrl=" + origin + "/authentication";
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     var openIdInfo = JSON.parse(xhr.response);
                     openIdSignInLink.href = openIdInfo.signInUrl;
-                    openIdAuthenticated = openIdInfo.signInUrl;
                 }
             };
             xhr.open("GET", openIdSignInUrl, true);
@@ -57,7 +36,7 @@
             if (document.location.search === "") {
                 openIdInfo.textContent = "Not Authenticated";
             } else {
-                openIdInfo.textContent = document.location.search;
+                openIdInfo.textContent = "Authenticated as: " + document.location.search;
             }
         };
         showOpenIdInfo();
@@ -73,12 +52,9 @@
         <a id="openIdSignInLink">
             Sign-in with AppDirect, using OpenID 2.0
         </a>
+        <br>
+        (OAuth 2.0 would be probably a better alternative)
     </li>
-    <!--<li>-->
-    <!--<button id="openIdSignInTrigger" onclick="openIdSignIn()">-->
-    <!--Sign-in with AppDirect, using OpenID 2.0-->
-    <!--</button>-->
-    <!--</li>-->
 </ul>
 <div id="openIdInfo"></div>
 </body>
