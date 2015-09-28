@@ -5,6 +5,7 @@
 package net.loxal.soa.restkit.endpoint.appdirect
 
 import net.loxal.soa.restkit.endpoint.Endpoint
+import net.loxal.soa.restkit.model.common.ErrorMessage
 import org.openid4java.consumer.ConsumerManager
 import org.openid4java.consumer.VerificationResult
 import org.openid4java.discovery.DiscoveryInformation
@@ -44,7 +45,7 @@ class OpenIdAuthentication : Endpoint() {
 
         Endpoint.LOG.info("openid.return_to: ${req.uriInfo.queryParameters["openid.return_to"]}")
         if (verification.verifiedId?.identifier == null) {
-            asyncResponse.resume(Response.status(Response.Status.UNAUTHORIZED).build())
+            asyncResponse.resume(Response.status(Response.Status.UNAUTHORIZED).entity(ErrorMessage(status = Response.Status.UNAUTHORIZED)).build())
         } else {
             Endpoint.LOG.info("requestUri: ${req.uriInfo.requestUri}")
             val redirection = "${req.uriInfo.baseUri}$clientRedirectionPath?openid.id=${verification.verifiedId.identifier}"
@@ -75,6 +76,6 @@ class OpenIdAuthentication : Endpoint() {
 
         private val clientRedirectionPath = "play/ground.html"
         private val openIdConsumer: ConsumerManager = ConsumerManager()
-        lateinit var endpointAssociation: DiscoveryInformation
+        private lateinit var endpointAssociation: DiscoveryInformation
     }
 }

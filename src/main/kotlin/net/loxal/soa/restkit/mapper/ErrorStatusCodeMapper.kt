@@ -23,12 +23,12 @@ class ErrorStatusCodeMapper : ExceptionMapper<WebApplicationException> {
             status = Response.Status.BAD_REQUEST
         }
 
-        val errorMessage = ErrorMessage.create(status.reasonPhrase)
-        errorMessage.status = status.statusCode
+        val errorMessage = ErrorMessage(status)
+        errorMessage.statusCode = status.statusCode
         errorMessage.message = exception.getMessage()
         errorMessage.moreInfo = status.family.name()
-        // TODO make specification of "type(MediaType.APPLICATION_JSON_TYPE)" superfluous
-        return Response.status(status.statusCode).type(MediaType.APPLICATION_JSON_TYPE).entity(errorMessage).build()
+
+        return Response.status(status.statusCode).entity(errorMessage).type(MediaType.APPLICATION_JSON_TYPE).build()
     }
 
     companion object {
