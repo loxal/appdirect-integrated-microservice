@@ -40,6 +40,6 @@ class AccessResource : Endpoint() {
     }
 
     companion object {
-        val RESOURCE_PATH = "${SubscriptionResource.APPDIRECT_ROOT_PATH}/user"
+        const val RESOURCE_PATH = "${SubscriptionResource.APPDIRECT_ROOT_PATH}/user"
     }
 }

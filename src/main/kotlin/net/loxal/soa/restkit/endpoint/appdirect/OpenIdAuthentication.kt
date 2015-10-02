@@ -72,7 +72,7 @@ class OpenIdAuthentication : Endpoint() {
     }
 
     companion object {
-        val RESOURCE_PATH = "authentication"
+        const val RESOURCE_PATH = "authentication"
 
         private val clientRedirectionPath = "play/ground.html"
         private val openIdConsumer: ConsumerManager = ConsumerManager()

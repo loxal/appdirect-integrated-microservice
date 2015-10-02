@@ -6,10 +6,15 @@ package net.loxal.soa.restkit.endpoint.appdirect
 
 import net.loxal.soa.restkit.client.KitClient
 import net.loxal.soa.restkit.endpoint.Endpoint
+import java.net.URL
 import javax.ws.rs.GET
 import javax.ws.rs.Path
+import javax.ws.rs.QueryParam
 import javax.ws.rs.container.AsyncResponse
+import javax.ws.rs.container.ContainerRequestContext
 import javax.ws.rs.container.Suspended
+import javax.ws.rs.core.Context
+import javax.ws.rs.core.HttpHeaders
 import javax.ws.rs.core.Response
 
 @Path(SubscriptionResource.RESOURCE_PATH)
@@ -20,21 +25,40 @@ class SubscriptionResource : Endpoint() {
     @Path("create")
     @GET
     fun create(
-            //            @Context requestContext: ContainerRequestContext,
+            @QueryParam("eventUrl") eventUrl: URL?,
+            @QueryParam("token") token: String?,
+            @Context req: ContainerRequestContext,
             @Suspended asyncResponse: AsyncResponse) {
 
         // TODO verify OAuth signature
 
-        asyncResponse.resume(Response.ok(Result(message = EventType.SUBSCRIPTION_ORDER.toString())).build())
+        showMoreInfo(eventUrl.toString(), null, req, token, null)
+
+        //        val fetchEvent = ClientBuilder.newClient().target(eventUrl?.toURI()).request().get();
+        //        val created: Event = fetchEvent.readEntity(Event::class.java);
+        //        val accountIdentifier = created.creator?.uuid
+        //        println(accountIdentifier)
+
+        asyncResponse.resume(Response.ok(Result(
+                message = EventType.SUBSCRIPTION_ORDER.toString()
+        )).build())
     }
 
     @Path("change")
     @GET
     fun change(
-            //            @Context requestContext: ContainerRequestContext,
+            content: Any?, /**/
+            @QueryParam("id") id: String?,
+            @QueryParam("url") url: String?,
+            @QueryParam("eventUrl") eventUrl: String?,
+            @QueryParam("token") token: String?,
+            @Context req: ContainerRequestContext,
             @Suspended asyncResponse: AsyncResponse) {
 
         // TODO verify OAuth signature
+
+        println("IDDDDDDDDDD $id")
+        showMoreInfo(eventUrl, content, req, token, url)
 
         asyncResponse.resume(Response.ok(Result(message = EventType.SUBSCRIPTION_CHANGE.toString())).build())
     }
@@ -42,10 +66,18 @@ class SubscriptionResource : Endpoint() {
     @Path("cancel")
     @GET
     fun cancel(
-            //            @Context requestContext: ContainerRequestContext,
+            content: Any?,
+            @QueryParam("id") id: String?,
+            @QueryParam("url") url: String?,
+            @QueryParam("eventUrl") eventUrl: String?,
+            @QueryParam("token") token: String?,
+            @Context req: ContainerRequestContext,
             @Suspended asyncResponse: AsyncResponse) {
 
         // TODO verify OAuth signature
+
+        println("IDDDDDDDDDD $id")
+        showMoreInfo(eventUrl, content, req, token, url)
 
         asyncResponse.resume(Response.ok(Result(message = EventType.SUBSCRIPTION_CANCEL.toString())).build())
     }
@@ -53,29 +85,41 @@ class SubscriptionResource : Endpoint() {
     @Path("status")
     @GET
     fun status(
-            //               @Context requestContext: ContainerRequestContext,
-               @Suspended asyncResponse: AsyncResponse) {
+            content: Any?,
+            @QueryParam("id") id: String?,
+            @QueryParam("url") url: String?,
+            @QueryParam("eventUrl") eventUrl: String?,
+            @QueryParam("token") token: String?,
+            @Context req: ContainerRequestContext,
+            @Suspended asyncResponse: AsyncResponse) {
 
         // TODO verify OAuth signature
+
+        println("IDDDDDDDDDD $id")
+        showMoreInfo(eventUrl, content, req, token, url)
 
         asyncResponse.resume(Response.ok(Result(message = EventType.SUBSCRIPTION_NOTICE.toString())).build())
     }
 
-    //    private fun showMoreInfo(eventUrl: String?, req: Any?, requestContext: ContainerRequestContext, token: String?, url: String?) {
-    //        Endpoint.LOG.info("eventUrl: $eventUrl")
-    //        Endpoint.LOG.info("url: $url")
-    //        Endpoint.LOG.info("token: $token")
-    //        Endpoint.LOG.info("req: $req")
-    //
-    //        val oAuthHeader: List<String>? = requestContext.headers.get(HttpHeaders.AUTHORIZATION)
-    //        requestContext.headers.forEach { header -> println("${header.key}: ${header.value}") }
-    //        println(requestContext.uriInfo)
-    //        println(requestContext.request)
-    //        println(requestContext.uriInfo.baseUri)
-    //        println(requestContext.uriInfo.requestUri)
-    //
-    //        println(requestContext)
-    //    }
+    private fun showMoreInfo(eventUrl: String?, req: Any?, requestContext: ContainerRequestContext, token: String?, url: String?) {
+        Endpoint.LOG.info("eventUrl: $eventUrl")
+        Endpoint.LOG.info("url: $url")
+        Endpoint.LOG.info("token: $token")
+        Endpoint.LOG.info("req: $req")
+
+        val oAuthHeader: List<String>? = requestContext.headers.get(HttpHeaders.AUTHORIZATION)
+        requestContext.headers.forEach { header -> println("${header.key}: ${header.value}") }
+        println(requestContext.uriInfo)
+        println(requestContext.request)
+        println(requestContext.uriInfo.baseUri)
+        println(requestContext.uriInfo.requestUri)
+
+        requestContext.uriInfo.queryParameters.forEach {
+            println("query: ${it.getKey()}:${it.getValue()}")
+        }
+
+        println(requestContext)
+    }
 
     @Path("custom")
     @GET
@@ -92,7 +136,7 @@ class SubscriptionResource : Endpoint() {
     //    }
 
     companion object {
-        val APPDIRECT_ROOT_PATH = "appdirect"
-        val RESOURCE_PATH = "$APPDIRECT_ROOT_PATH/subscription"
+        const val APPDIRECT_ROOT_PATH = "appdirect"
+        const val RESOURCE_PATH = "$APPDIRECT_ROOT_PATH/subscription"
     }
 }

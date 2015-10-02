@@ -152,6 +152,6 @@ class VoteResourceIT : AbstractEndpointTest() {
     }
 
     companion object {
-        private val ANSWER_OPTION_INDEX = 1
+        private const val ANSWER_OPTION_INDEX = 1
     }
 }

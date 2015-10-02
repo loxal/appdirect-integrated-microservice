@@ -24,9 +24,9 @@ class AccessControlFilter : ContainerResponseFilter {
     }
 
     companion object {
-        val allowOriginHeader = "Access-Control-Allow-Origin"
-        val allowOriginHeaderValue = "*"
-        val allowHeadersHeader = "Access-Control-Allow-Headers"
+        const val allowOriginHeader = "Access-Control-Allow-Origin"
+        const val allowOriginHeaderValue = "*"
+        const val allowHeadersHeader = "Access-Control-Allow-Headers"
         val allowHeadersValue = listOf("Origin", "X-Requested-With", "")
     }
 }
