@@ -10,12 +10,12 @@
     <parent>
         <groupId>net.loxal</groupId>
         <artifactId>meta</artifactId>
-        <version>1.2.12</version>
+        <version>1.2.13</version>
     </parent>
 
     <groupId>net.loxal.soa</groupId>
     <artifactId>rest-kit</artifactId>
-    <version>1.5.4-SNAPSHOT</version>
+    <version>1.5.5-SNAPSHOT</version>
     <name>RESTkit</name>
     <packaging>war</packaging>
     <description>Microservice Toolkit</description>

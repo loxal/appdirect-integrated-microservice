@@ -115,9 +115,9 @@ class DilbertQuoteService : Endpoint() {
         private val random: Random = Random()
 
         val RESOURCE_PATH = "dilbert-quote"
-        val RESOURCE_PATH_PROGRAMMER = "programmer"
-        val RESOURCE_PATH_MANAGER = "manager"
-        val RESOURCE_PATH_ENTERPRISE = "enterprise"
+        const val RESOURCE_PATH_PROGRAMMER = "programmer"
+        const val RESOURCE_PATH_MANAGER = "manager"
+        const val RESOURCE_PATH_ENTERPRISE = "enterprise"
         val mediaType = MediaType.APPLICATION_JSON + ";charset=utf-8"
     }
 }
