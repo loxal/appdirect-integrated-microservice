@@ -20,7 +20,7 @@ import javax.ws.rs.container.Suspended
 
 @Path(SubscriptionResource.RESOURCE_PATH)
 class SubscriptionResource : Endpoint() {
-    @Path("create")
+    @Path("order")
     @GET
     fun create(
             @QueryParam(EVENT_URL_QUERY_PARAM) eventUrl: URL?,
