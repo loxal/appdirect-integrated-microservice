@@ -5,6 +5,7 @@
 package net.loxal.soa.restkit.endpoint.appdirect
 
 import net.loxal.soa.restkit.endpoint.Endpoint
+import net.loxal.soa.restkit.endpoint.appdirect.dto.OpenIdInfo
 import net.loxal.soa.restkit.model.common.ErrorMessage
 import org.openid4java.consumer.ConsumerManager
 import org.openid4java.consumer.VerificationResult

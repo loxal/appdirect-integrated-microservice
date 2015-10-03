@@ -2,7 +2,7 @@
  * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
-package net.loxal.soa.restkit.endpoint.appdirect
+package net.loxal.soa.restkit.endpoint.appdirect.dto
 
 import java.net.URI
 import javax.xml.bind.annotation.XmlRootElement

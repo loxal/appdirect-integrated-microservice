@@ -6,6 +6,7 @@ package net.loxal.soa.restkit.endpoint.appdirect
 
 import net.loxal.soa.restkit.client.ADClient
 import net.loxal.soa.restkit.endpoint.Endpoint
+import net.loxal.soa.restkit.endpoint.appdirect.dto.EventType
 import java.net.URL
 import javax.ws.rs.GET
 import javax.ws.rs.Path

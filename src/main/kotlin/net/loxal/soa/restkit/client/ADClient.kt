@@ -5,10 +5,10 @@
 package net.loxal.soa.restkit.client
 
 import net.loxal.soa.restkit.endpoint.Endpoint
-import net.loxal.soa.restkit.endpoint.appdirect.ADError
-import net.loxal.soa.restkit.endpoint.appdirect.Event
-import net.loxal.soa.restkit.endpoint.appdirect.EventType
-import net.loxal.soa.restkit.endpoint.appdirect.Result
+import net.loxal.soa.restkit.endpoint.appdirect.dto.ADError
+import net.loxal.soa.restkit.endpoint.appdirect.dto.Event
+import net.loxal.soa.restkit.endpoint.appdirect.dto.EventType
+import net.loxal.soa.restkit.endpoint.appdirect.dto.Result
 import oauth.signpost.OAuthConsumer
 import oauth.signpost.basic.DefaultOAuthConsumer
 import org.slf4j.LoggerFactory
@@ -40,7 +40,6 @@ class ADClient() {
         }
     }
 
-    // TODO encapsulate all methods in a service layer and delegate to it
     fun handleAppDirectEvent(asyncResponse: AsyncResponse, eventUrl: URL?, eventType: EventType) {
         val fetchedEvent: Response = fetchEvent(eventUrl?.toURI())
 

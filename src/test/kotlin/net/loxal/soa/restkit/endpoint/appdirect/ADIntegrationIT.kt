@@ -5,6 +5,7 @@
 package net.loxal.soa.restkit.endpoint.appdirect
 
 import net.loxal.soa.restkit.endpoint.AbstractEndpointTest
+import net.loxal.soa.restkit.endpoint.appdirect.dto.*
 import org.junit.Test
 import java.net.URI
 import javax.ws.rs.core.MediaType
