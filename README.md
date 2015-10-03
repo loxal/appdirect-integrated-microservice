@@ -14,6 +14,7 @@
 
 ## Getting Started
 
+1. Add all corresponding required properties like `appdirect.oauth.consumer.secret` to your local `~/.m2/settings.xml` file.
 1. Run WAR __mvn jetty:run__
 1. Call http://local.loxal.net:8200/application.wadl
 1. Try http://local.loxal.net:8200
