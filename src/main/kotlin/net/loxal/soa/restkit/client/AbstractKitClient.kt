@@ -24,7 +24,7 @@ abstract class AbstractKitClient<out T> protected constructor() {
 
     abstract fun delete(entityType: Class<in T>, id: String): Response
 
-    abstract fun get(entityType: Class<in T>, id: String): Response
+    operator abstract fun get(entityType: Class<in T>, id: String): Response
 
     abstract fun put(json: Entity<in T>, id: String): Response
 

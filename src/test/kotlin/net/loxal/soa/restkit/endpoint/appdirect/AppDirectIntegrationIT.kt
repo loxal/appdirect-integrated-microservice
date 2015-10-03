@@ -7,10 +7,24 @@ package net.loxal.soa.restkit.endpoint.appdirect
 import net.loxal.soa.restkit.endpoint.AbstractEndpointTest
 import org.junit.Test
 import java.net.URI
+import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
 import kotlin.test.assertEquals
 
-class DtoApiIT {
+class AppDirectIntegrationIT {
+    @Test
+    fun triggerCreate() {
+        val eventId = "dummyOrder"
+        val response = AbstractEndpointTest.prepareGenericRequest(SubscriptionResource.RESOURCE_PATH + "/create")
+                .queryParam(SubscriptionResource.EVENT_URL_QUERY_PARAM, APP_DIRECT_EVENT_ENDPOINT + eventId)
+                .queryParam(SubscriptionResource.TOKEN_QUERY_PARAM, eventId)
+                .request()
+                .get()
+
+        assertEquals(Response.Status.OK, response.statusInfo)
+        assertEquals(MediaType.APPLICATION_XML_TYPE, response.mediaType)
+    }
+
     @Test
     fun checkDummyChange() {
         val referenceDummyEvent = ChangeEvent(
@@ -105,6 +119,7 @@ class DtoApiIT {
     }
 
     companion object {
+        private const val APP_DIRECT_EVENT_ENDPOINT = "https://www.appdirect.com/api/integration/v1/events/"
         private val dummyEndpoint = URI.create("https://www.appdirect.com/rest/api/events/")
     }
 }

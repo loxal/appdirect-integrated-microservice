@@ -10,8 +10,8 @@ import javax.xml.bind.annotation.XmlRootElement
 
 @XmlRootElement(name = "result")
 data class Result(
-        var success: Boolean = true,
-        var accountIdentifier: String = "",
+        var success: Boolean = false,
+        var accountIdentifier: String? = "",
         var message: String = "",
         var errorCode: ErrorCode? = null
 )
@@ -103,4 +103,6 @@ enum class EventType {
 
     USER_ASSIGNMENT,
     USER_UNASSIGNMENT,
+
+    ADDON,
 }
