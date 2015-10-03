@@ -13,9 +13,61 @@ import kotlin.test.assertEquals
 
 class AppDirectIntegrationIT {
     @Test
-    fun triggerCreate() {
+    fun createSubscription() {
         val eventId = "dummyOrder"
         val response = AbstractEndpointTest.prepareGenericRequest(SubscriptionResource.RESOURCE_PATH + "/create")
+                .queryParam(SubscriptionResource.EVENT_URL_QUERY_PARAM, APP_DIRECT_EVENT_ENDPOINT + eventId)
+                .queryParam(SubscriptionResource.TOKEN_QUERY_PARAM, eventId)
+                .request()
+                .get()
+
+        assertEquals(Response.Status.OK, response.statusInfo)
+        assertEquals(MediaType.APPLICATION_XML_TYPE, response.mediaType)
+    }
+
+    @Test
+    fun changeSubscription() {
+        val eventId = "dummyChange"
+        val response = AbstractEndpointTest.prepareGenericRequest(SubscriptionResource.RESOURCE_PATH + "/change")
+                .queryParam(SubscriptionResource.EVENT_URL_QUERY_PARAM, APP_DIRECT_EVENT_ENDPOINT + eventId)
+                .queryParam(SubscriptionResource.TOKEN_QUERY_PARAM, eventId)
+                .request()
+                .get()
+
+        assertEquals(Response.Status.OK, response.statusInfo)
+        assertEquals(MediaType.APPLICATION_XML_TYPE, response.mediaType)
+    }
+
+    @Test
+    fun cancelSubscription() {
+        val eventId = "dummyCancel"
+        val response = AbstractEndpointTest.prepareGenericRequest(SubscriptionResource.RESOURCE_PATH + "/cancel")
+                .queryParam(SubscriptionResource.EVENT_URL_QUERY_PARAM, APP_DIRECT_EVENT_ENDPOINT + eventId)
+                .queryParam(SubscriptionResource.TOKEN_QUERY_PARAM, eventId)
+                .request()
+                .get()
+
+        assertEquals(Response.Status.OK, response.statusInfo)
+        assertEquals(MediaType.APPLICATION_XML_TYPE, response.mediaType)
+    }
+
+    @Test
+    fun assignUser() {
+        val eventId = "dummyAssign"
+        val response = AbstractEndpointTest.prepareGenericRequest(AccessResource.RESOURCE_PATH + "/assign")
+                .queryParam(SubscriptionResource.EVENT_URL_QUERY_PARAM, APP_DIRECT_EVENT_ENDPOINT + eventId)
+                .queryParam(SubscriptionResource.TOKEN_QUERY_PARAM, eventId)
+                .request()
+                .get()
+
+        assertEquals(Response.Status.OK, response.statusInfo)
+        assertEquals(MediaType.APPLICATION_XML_TYPE, response.mediaType)
+    }
+
+    @Test
+    fun unassignUser() {
+        val eventId = "dummyUnassign"
+        val response = AbstractEndpointTest.prepareGenericRequest(AccessResource.RESOURCE_PATH + "/unassign")
                 .queryParam(SubscriptionResource.EVENT_URL_QUERY_PARAM, APP_DIRECT_EVENT_ENDPOINT + eventId)
                 .queryParam(SubscriptionResource.TOKEN_QUERY_PARAM, eventId)
                 .request()

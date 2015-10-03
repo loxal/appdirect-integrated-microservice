@@ -16,6 +16,12 @@ data class Result(
         var errorCode: ErrorCode? = null
 )
 
+@XmlRootElement(name = "error")
+data class ADError(
+        var message: String = "",
+        var code: ErrorCode? = null
+)
+
 @XmlRootElement(name = "event")
 data class Event(
         var type: EventType = EventType.SUBSCRIPTION_ORDER,
