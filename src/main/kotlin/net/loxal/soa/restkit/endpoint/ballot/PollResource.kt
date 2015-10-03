@@ -81,7 +81,7 @@ class PollResource : Endpoint() {
     }
 
     companion object {
-        private val RESOURCE_NAME = "poll"
-        public val RESOURCE_PATH: String = "ballot/" + RESOURCE_NAME
+        private const val RESOURCE_NAME = "poll"
+        public const val RESOURCE_PATH: String = "ballot/" + RESOURCE_NAME
     }
 }

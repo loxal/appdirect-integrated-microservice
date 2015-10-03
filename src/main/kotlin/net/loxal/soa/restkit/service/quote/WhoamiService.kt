@@ -32,6 +32,6 @@ class WhoamiService : Endpoint() {
 
     companion object {
         private val LOG = LoggerFactory.getLogger(WhoamiService::class.java)
-        val RESOURCE_PATH = "who-am-i"
+        const val RESOURCE_PATH = "who-am-i"
     }
 }

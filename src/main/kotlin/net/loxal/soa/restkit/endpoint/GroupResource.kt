@@ -80,6 +80,6 @@ class GroupResource : Endpoint() {
     }
 
     companion object {
-        public val RESOURCE_PATH: String = "group"
+        public const val RESOURCE_PATH: String = "group"
     }
 }

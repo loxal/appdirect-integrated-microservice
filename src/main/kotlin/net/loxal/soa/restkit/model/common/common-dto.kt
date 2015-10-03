@@ -26,15 +26,12 @@ data class ErrorMessage(
     var details: Set<ErrorDetail> = emptySet()
 }
 
-data class ErrorDetail private constructor() {
+data class ErrorDetail(@NotNull var type: String = "") {
     var field: String = ""
-    @NotNull
-    var type: String = ""
     var message: String = ""
 }
 
-data class Authorization () {
-    var access_token: String = ""
+data class Authorization(@NotNull var access_token: String = "") {
     var expires_in: Int = 0
     var token_type: String = ""
     var scope: String = ""

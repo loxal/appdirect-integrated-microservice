@@ -44,7 +44,7 @@ class KitClient<T> : AbstractKitClient<T>() {
         public val appId: String
         public val clientId: String
         val INFIX_PATH: String = "data"
-        var authorization = Authorization()
+        lateinit var authorization: Authorization
         private val properties = Properties()
         private val tokenRefresher: ScheduledExecutorService = Executors.newScheduledThreadPool(1)
         val repositoryServiceProxyUrl: URI

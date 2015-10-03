@@ -114,10 +114,10 @@ class DilbertQuoteService : Endpoint() {
         val quotesProgrammer: List<Quote> = objectMapper.readValue(quoteProgrammerData, quotesType)
         private val random: Random = Random()
 
-        val RESOURCE_PATH = "dilbert-quote"
+        const val RESOURCE_PATH = "dilbert-quote"
         const val RESOURCE_PATH_PROGRAMMER = "programmer"
         const val RESOURCE_PATH_MANAGER = "manager"
         const val RESOURCE_PATH_ENTERPRISE = "enterprise"
-        val mediaType = MediaType.APPLICATION_JSON + ";charset=utf-8"
+        const val mediaType = MediaType.APPLICATION_JSON + ";charset=utf-8"
     }
 }

@@ -48,6 +48,6 @@ class ResolveIpAddressService : Endpoint() {
     companion object {
         const val HOST_NAME_PARAM: String = "hostName"
         protected val LOG: Logger = LoggerFactory.getLogger(ResolveIpAddressService::class.java)
-        val RESOURCE_PATH = "resolve-ip-address"
+        const val RESOURCE_PATH = "resolve-ip-address"
     }
 }
