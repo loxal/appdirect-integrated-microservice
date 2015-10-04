@@ -6,12 +6,11 @@ package net.loxal.soa.restkit.endpoint
 
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
+import net.loxal.soa.restkit.App
 import net.loxal.soa.restkit.filter.AccessControlFilter
 import org.junit.Test
 import org.slf4j.LoggerFactory
-import java.io.IOException
 import java.net.URI
-import java.util.*
 import javax.ws.rs.client.ClientBuilder
 import javax.ws.rs.client.WebTarget
 import javax.ws.rs.core.MediaType
@@ -36,7 +35,6 @@ abstract class AbstractEndpointTest {
         val SERVICE_TARGET: String
         private val client = ClientBuilder.newClient()
         private val mapper = ObjectMapper()
-        public var properties: Properties
         var resourcePath: String = "/"
 
         public fun prepareGenericRequest(path: String): WebTarget {
@@ -52,15 +50,7 @@ abstract class AbstractEndpointTest {
         }
 
         init {
-            val classLoader = Thread.currentThread().contextClassLoader
-            properties = Properties()
-            try {
-                properties.load(classLoader.getResourceAsStream("local.properties"))
-            } catch (e: IOException) {
-                LOG.error("Impossible to load property file. \n ${e.getMessage()}")
-            }
-
-            SERVICE_TARGET = properties.getProperty("deploymentTarget")
+            SERVICE_TARGET = App.PROPERTIES.getProperty("deploymentTarget")
 
             mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
             client.register(mapper)

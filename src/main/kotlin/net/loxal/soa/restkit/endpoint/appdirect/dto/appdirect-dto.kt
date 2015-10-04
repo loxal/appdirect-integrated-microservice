@@ -26,7 +26,7 @@ data class ADError(
 data class Event(
         var type: EventType = EventType.SUBSCRIPTION_ORDER,
         var marketplace: EventMarketplace? = null,
-        var flag: EventFlag = EventFlag.STATELESS,
+        var flag: EventFlag = EventFlag.DEVELOPMENT,
         var creator: EventCreator? = null,
         var payload: EventPayload? = null,
         var returnUrl: URI? = null

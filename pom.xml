@@ -21,7 +21,7 @@
     <description>Microservice Toolkit</description>
 
     <properties>
-        <tomcat.version>8.0.24</tomcat.version>
+        <tomcat.version>8.0.27</tomcat.version>
         <jetty-maven-plugin.version>9.3.4.RC0</jetty-maven-plugin.version>
         <jersey.version>2.22</jersey.version>
 
@@ -281,7 +281,7 @@
             <plugin>
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven2-plugin</artifactId>
-                <version>1.4.14</version>
+                <version>1.4.16</version>
                 <configuration>
                     <container>
                         <containerId>tomcat8x</containerId>

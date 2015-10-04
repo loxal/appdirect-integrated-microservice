@@ -4,9 +4,9 @@
 
 package net.loxal.soa.restkit.client
 
+import net.loxal.soa.restkit.App
 import net.loxal.soa.restkit.model.common.Authorization
 import java.net.URI
-import java.util.*
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
@@ -43,17 +43,15 @@ class KitClient<T> : AbstractKitClient<T>() {
         public val clientId: String
         val INFIX_PATH: String = "data"
         lateinit var authorization: Authorization
-        private val properties = Properties()
         private val tokenRefresher: ScheduledExecutorService = Executors.newScheduledThreadPool(1)
         val repositoryServiceProxyUrl: URI
         val tenant: String
 
         init {
-            properties.load(KitClient::class.java.getResourceAsStream("/local.properties"))
-            clientId = properties.getProperty("app.clientId")
-            appId = properties.getProperty("appId")
-            tenant = properties.getProperty("tenant")
-            repositoryServiceProxyUrl = URI.create(properties.getProperty("repositoryServiceProxyUrl"))
+            clientId = App.PROPERTIES.getProperty("app.clientId")
+            appId = App.PROPERTIES.getProperty("appId")
+            tenant = App.PROPERTIES.getProperty("tenant")
+            repositoryServiceProxyUrl = URI.create(App.PROPERTIES.getProperty("repositoryServiceProxyUrl"))
 
             tokenRefresher.scheduleAtFixedRate(refreshToken(), 0, 3500, TimeUnit.SECONDS)
         }
@@ -71,11 +69,11 @@ class KitClient<T> : AbstractKitClient<T>() {
             tokenRequestBody.putSingle("grant_type", "client_credentials")
             tokenRequestBody.putSingle("scope", "hybris.document_manage hybris.document_view")
             tokenRequestBody.putSingle("client_id", clientId)
-            tokenRequestBody.putSingle("client_secret", properties.getProperty("app.clientSecret"))
+            tokenRequestBody.putSingle("client_secret", App.PROPERTIES.getProperty("app.clientSecret"))
 
             val tokenRequestForm = Form(tokenRequestBody)
 
-            val accessToken = AbstractKitClient.CLIENT.target(properties.getProperty("oAuth2ServiceUrl"))
+            val accessToken = AbstractKitClient.CLIENT.target(App.PROPERTIES.getProperty("oAuth2ServiceUrl"))
                     .request()
                     .post(Entity.form(tokenRequestForm))
 

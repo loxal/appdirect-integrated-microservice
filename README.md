@@ -19,6 +19,10 @@
 1. Call http://local.loxal.net:8200/application.wadl
 1. Try http://local.loxal.net:8200
 
+Alternatively Tomcat Servlet Container can run the app
+
+1. mvn package cargo:run
+
 ## Demo Showcase
 
 * Demo Instance running on (private) CloudFoundry

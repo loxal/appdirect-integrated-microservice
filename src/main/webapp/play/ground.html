@@ -8,11 +8,11 @@
 
 <script>
     "use strict";
-    var openIdSignInTrigger = document.getElementById("openIdSignInTrigger");
 
     function main() {
         var configure = function () {
             var openIdSignInLink = document.getElementById("openIdSignInLink");
+            var signOut = document.getElementById("signOut");
         };
 
         var load = function () {
@@ -35,8 +35,10 @@
             var openIdInfo = document.getElementById("openIdInfo");
             if (document.location.search === "") {
                 openIdInfo.textContent = "Not Authenticated";
+                signOut.style.visibility = "hidden";
             } else {
                 openIdInfo.textContent = "Authenticated as: " + document.location.search;
+                signOut.style.visibility = "visible";
             }
         };
         showOpenIdInfo();
@@ -57,4 +59,6 @@
     </li>
 </ul>
 <div id="openIdInfo"></div>
+<br>
+<a href="/play/ground.html" id="signOut" style="visibility: hidden;">“Sign-out” (stateless web app)</a>
 </body>

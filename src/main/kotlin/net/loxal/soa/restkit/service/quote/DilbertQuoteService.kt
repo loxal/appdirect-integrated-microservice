@@ -97,7 +97,7 @@ class DilbertQuoteService : Endpoint() {
     companion object {
         private val LOG = LoggerFactory.getLogger(DilbertQuoteService::class.java)
 
-        private data class Quotes : TypeReference<List<Quote>>()
+        private class Quotes : TypeReference<List<Quote>>()
 
         private val quotesType = Quotes()
         private val objectMapper = ObjectMapper()
