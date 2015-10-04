@@ -10,11 +10,6 @@
     "use strict";
 
     function main() {
-        var configure = function () {
-            var openIdSignInLink = document.getElementById("openIdSignInLink");
-            var signOut = document.getElementById("signOut");
-        };
-
         var load = function () {
             var origin = document.location.origin;
             var openIdSignInUrl = origin + "/authentication/openid?url=https://www.appdirect.com/openid/id&returnToUrl=" + origin + "/authentication";
@@ -29,8 +24,6 @@
             xhr.send();
         };
 
-        configure();
-        load();
         var showOpenIdInfo = function () {
             var openIdInfo = document.getElementById("openIdInfo");
             if (document.location.search === "") {
@@ -41,6 +34,8 @@
                 signOut.style.visibility = "visible";
             }
         };
+
+        load();
         showOpenIdInfo();
     }
 </script>

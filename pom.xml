@@ -201,7 +201,7 @@
             <plugin>
                 <groupId>com.google.appengine</groupId>
                 <artifactId>appengine-maven-plugin</artifactId>
-                <version>1.9.25</version>
+                <version>1.9.27</version>
             </plugin>
             <plugin>
                 <groupId>com.google.appengine</groupId>
@@ -340,7 +340,7 @@
             <plugin>
                 <groupId>org.cloudfoundry</groupId>
                 <artifactId>cf-maven-plugin</artifactId>
-                <version>1.4.1.KIWI-RELEASE</version>
+                <version>1.1.3</version>
                 <configuration>
                     <server>hybris.CloudFoundry</server>
                     <target>https://${cf.target}</target>
@@ -360,9 +360,8 @@
                     <space>${cf.space}</space>
                     <path>${project.build.directory}/${project.build.finalName}.war</path>
                     <instances>1</instances>
-                    <retainNumberOfBuilds>2</retainNumberOfBuilds>
                     <memory>512</memory>
-                    <trustSelfSignedCerts>true</trustSelfSignedCerts>
+                    <trustSelfSignedCerts>false</trustSelfSignedCerts>
                     <env>
                         <tenant>${tenant}</tenant>
                     </env>

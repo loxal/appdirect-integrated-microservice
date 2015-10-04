@@ -3,7 +3,7 @@
   <component name="FacetManager">
     <facet type="google-app-engine" name="Google App Engine">
       <configuration>
-        <sdk-home-path>$MAVEN_REPOSITORY$/com/google/appengine/appengine-java-sdk/1.9.25/appengine-java-sdk/appengine-java-sdk-1.9.25</sdk-home-path>
+        <sdk-home-path>$MAVEN_REPOSITORY$/com/google/appengine/appengine-java-sdk/1.9.27/appengine-java-sdk/appengine-java-sdk-1.9.27</sdk-home-path>
       </configuration>
     </facet>
     <facet type="web" name="Web">

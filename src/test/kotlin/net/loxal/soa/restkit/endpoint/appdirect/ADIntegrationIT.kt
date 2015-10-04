@@ -14,6 +14,11 @@ import kotlin.test.assertEquals
 
 class ADIntegrationIT {
     @Test
+    fun order() {
+        fireEvent("Order", SubscriptionResource.RESOURCE_PATH)
+    }
+
+    @Test
     fun verifySubscriptionEventHandling() {
         val events = listOf("Order", "Change", "Cancel")
         events.forEach {

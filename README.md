@@ -5,7 +5,7 @@
 * Endpoint for enterprise environment working condition quotations: `/dilbert-quote/enterprise`
 * Endpoint for manager quotations: `/dilbert-quote/manager`
 * Endpoint for programmer quotations: `/dilbert-quote/programmer`
-* OpenID authentication: `/play/ground.html`
+* OpenID 2.0 authentication: `/play/ground.html`
 
 ## Who am I
 
@@ -14,12 +14,12 @@
 
 ## Getting Started
 
-1. Add all corresponding required properties like `appdirect.oauth.consumer.secret` to your local `~/.m2/settings.xml` file.
+1. Add all corresponding required properties like `appdirect.oauth.consumer.secret` to your `~/.m2/settings.xml`.
 1. Run WAR __mvn jetty:run__
 1. Call http://local.loxal.net:8200/application.wadl
 1. Try http://local.loxal.net:8200
 
-Alternatively Tomcat Servlet Container can run the app
+Alternatively _Tomcat_ Servlet Container can run the app
 
 1. mvn package cargo:run
 
@@ -30,11 +30,11 @@ Alternatively Tomcat Servlet Container can run the app
 
 # Deploy & Release
 
-## Deploy to CloudFoundry
+## Deploy to Cloud Foundry
 
-* run `./release.sh` 
+* Run `./release.sh` 
 
 ## Deploy to Google App Engine 
 
-* edit `./release.sh` appropriately 
-* run `./release.sh`
+* Edit `./release.sh` appropriately 
+* Run `./release.sh`
