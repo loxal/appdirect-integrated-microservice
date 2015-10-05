@@ -55,16 +55,15 @@ class ADIntegrationIT {
         assertEquals(accountIdentifier, result.accountIdentifier)
         assertEquals(true, result.success)
         assertEquals(null, result.errorCode)
-        assertEquals(
-                when (eventType) {
-                    "Order" -> EventType.SUBSCRIPTION_ORDER
-                    "Change" -> EventType.SUBSCRIPTION_CHANGE
-                    "Cancel" -> EventType.SUBSCRIPTION_CANCEL
-                    "Assign" -> EventType.USER_ASSIGNMENT
-                    "Unassign" -> EventType.USER_UNASSIGNMENT
-                    else -> EventType.ADDON
-                }.toString()
-                , result.message)
+        val eventNameLookup: EventType = when (eventType) {
+            "Order" -> EventType.SUBSCRIPTION_ORDER
+            "Change" -> EventType.SUBSCRIPTION_CHANGE
+            "Cancel" -> EventType.SUBSCRIPTION_CANCEL
+            "Assign" -> EventType.USER_ASSIGNMENT
+            "Unassign" -> EventType.USER_UNASSIGNMENT
+            else -> EventType.ADDON
+        }
+        assertEquals(eventNameLookup.name(), result.message)
     }
 
     @Test
