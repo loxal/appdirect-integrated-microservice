@@ -15,37 +15,56 @@ import kotlin.test.assertEquals
 class ADIntegrationIT {
     @Test
     fun order() {
-        fireEvent("Order", SubscriptionResource.RESOURCE_PATH)
+        fireEvent(EventType.SUBSCRIPTION_ORDER.toString(), SubscriptionResource.RESOURCE_PATH)
     }
 
     @Test
-    fun verifySubscriptionEventHandling() {
-        val events = listOf("Order", "Change", "Cancel")
-        events.forEach {
-            fireEvent(it, SubscriptionResource.RESOURCE_PATH)
-        }
+    fun change() {
+        fireEvent(EventType.SUBSCRIPTION_CHANGE.toString(), SubscriptionResource.RESOURCE_PATH)
     }
 
     @Test
-    fun verifyUserAccessEventHandling() {
-        val events = listOf("Assign", "Unassign")
-        events.forEach {
-            fireEvent(it, AccessResource.RESOURCE_PATH)
-        }
+    fun cancel() {
+        fireEvent(EventType.SUBSCRIPTION_CANCEL.toString(), SubscriptionResource.RESOURCE_PATH)
     }
 
-    private fun fireEvent(event: String, eventEndpointPath: String) {
+    @Test
+    fun assign() {
+        fireEvent(EventType.USER_ASSIGNMENT.toString(), AccessResource.RESOURCE_PATH)
+    }
+
+    @Test
+    fun unassign() {
+        fireEvent(EventType.USER_UNASSIGNMENT.toString(), AccessResource.RESOURCE_PATH)
+    }
+
+    private fun fireEvent(eventType: String, eventEndpointPath: String) {
         val dummyEventPrefix = "dummy"
-        val eventId = dummyEventPrefix + event
-        println(eventId)
-        val response = AbstractEndpointTest.prepareGenericRequest(eventEndpointPath + "/" + event.toLowerCase())
+        val eventId = dummyEventPrefix + eventType
+
+        val event = AbstractEndpointTest.prepareGenericRequest(eventEndpointPath + "/" + eventType.toLowerCase())
                 .queryParam(SubscriptionResource.EVENT_URL_QUERY_PARAM, APP_DIRECT_EVENT_ENDPOINT + eventId)
                 .queryParam(SubscriptionResource.TOKEN_QUERY_PARAM, eventId)
                 .request()
                 .get()
 
-        assertEquals(Response.Status.OK, response.statusInfo)
-        assertEquals(MediaType.APPLICATION_XML_TYPE, response.mediaType)
+        assertEquals(Response.Status.OK, event.statusInfo)
+        assertEquals(MediaType.APPLICATION_XML_TYPE, event.mediaType)
+
+        val result = event.readEntity(Result::class.java)
+        assertEquals(accountIdentifier, result.accountIdentifier)
+        assertEquals(true, result.success)
+        assertEquals(null, result.errorCode)
+        assertEquals(
+                when (eventType) {
+                    "Order" -> EventType.SUBSCRIPTION_ORDER
+                    "Change" -> EventType.SUBSCRIPTION_CHANGE
+                    "Cancel" -> EventType.SUBSCRIPTION_CANCEL
+                    "Assign" -> EventType.USER_ASSIGNMENT
+                    "Unassign" -> EventType.USER_UNASSIGNMENT
+                    else -> EventType.ADDON
+                }.toString()
+                , result.message)
     }
 
     @Test
@@ -144,5 +163,6 @@ class ADIntegrationIT {
     companion object {
         private const val APP_DIRECT_EVENT_ENDPOINT = "https://www.appdirect.com/api/integration/v1/events/"
         private val dummyEndpoint = URI.create("https://www.appdirect.com/rest/api/events/")
+        private const val accountIdentifier = "ec5d8eda-5cec-444d-9e30-125b6e4b67e2"
     }
 }

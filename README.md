@@ -14,7 +14,8 @@
 
 ## Getting Started
 
-1. Add all corresponding required properties like `appdirect.oauth.consumer.secret` to your `~/.m2/settings.xml`.
+1. **Add all corresponding required properties like `appdirect.oauth.consumer.secret` to your `~/.m2/settings.xml`.**
+
 1. Run WAR __mvn jetty:run__
 1. Call http://local.loxal.net:8200/application.wadl
 1. Try http://local.loxal.net:8200
@@ -36,5 +37,5 @@ Alternatively _Tomcat_ Servlet Container can run the app
 
 ## Deploy to Google App Engine 
 
-* Edit `./release.sh` appropriately 
-* Run `./release.sh`
+1. Edit `./release.sh` appropriately 
+1. Run `./release.sh`

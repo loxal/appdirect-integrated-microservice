@@ -102,13 +102,22 @@ enum class ErrorCode {
 }
 
 enum class EventType {
-    SUBSCRIPTION_ORDER,
-    SUBSCRIPTION_CHANGE,
-    SUBSCRIPTION_CANCEL,
+    SUBSCRIPTION_ORDER {
+        override final fun toString() = "Order"
+    },
+    SUBSCRIPTION_CHANGE {
+        override final fun toString() = "Change"
+    },
+    SUBSCRIPTION_CANCEL {
+        override final fun toString() = "Cancel"
+    },
     SUBSCRIPTION_NOTICE,
-
-    USER_ASSIGNMENT,
-    USER_UNASSIGNMENT,
+    USER_ASSIGNMENT {
+        override final fun toString() = "Assign"
+    },
+    USER_UNASSIGNMENT {
+        override final fun toString() = "Unassign"
+    },
 
     ADDON,
 }
