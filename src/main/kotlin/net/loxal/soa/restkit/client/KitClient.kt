@@ -41,8 +41,8 @@ class KitClient<T> : AbstractKitClient<T>() {
     companion object {
         public val appId: String
         public val clientId: String
-        val INFIX_PATH: String = "data"
-        lateinit var authorization: Authorization
+        const val INFIX_PATH: String = "data"
+        var authorization: Authorization
         private val tokenRefresher: ScheduledExecutorService = Executors.newScheduledThreadPool(1)
         val repositoryServiceProxyUrl: URI
         val tenant: String
@@ -54,6 +54,7 @@ class KitClient<T> : AbstractKitClient<T>() {
             repositoryServiceProxyUrl = URI.create(App.PROPERTIES.getProperty("repositoryServiceProxyUrl"))
 
             tokenRefresher.scheduleAtFixedRate(refreshToken(), 0, 3500, TimeUnit.SECONDS)
+            authorization = authorize()
         }
 
         private final fun refreshToken() = Runnable {

@@ -6,7 +6,6 @@ package net.loxal.soa.restkit.service.quote
 
 import net.loxal.soa.restkit.endpoint.AbstractEndpointTest
 import net.loxal.soa.restkit.model.dilbert.Quote
-import org.junit.Before
 import org.junit.Test
 import javax.ws.rs.core.Response
 import kotlin.test.assertEquals
@@ -18,11 +17,6 @@ class DilbertQuoteServiceIT : AbstractEndpointTest() {
     private val RESOURCE_PATH_PROGRAMMER = "${DilbertQuoteService.RESOURCE_PATH}/${DilbertQuoteService.RESOURCE_PATH_PROGRAMMER}"
     private val RESOURCE_PATH_MANAGER = "${DilbertQuoteService.RESOURCE_PATH}/${DilbertQuoteService.RESOURCE_PATH_MANAGER}"
     private val RESOURCE_PATH_ENTERPRISE = "${DilbertQuoteService.RESOURCE_PATH}/${DilbertQuoteService.RESOURCE_PATH_ENTERPRISE}"
-
-    @Before
-    public fun setUp() {
-        AbstractEndpointTest.resourcePath = RESOURCE_PATH_PROGRAMMER
-    }
 
     @Test
     public fun getEnterpriseQuote(): Unit = retrieveSingleQuote(RESOURCE_PATH_ENTERPRISE)

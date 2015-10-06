@@ -6,18 +6,12 @@ package net.loxal.soa.restkit.service.quote
 
 import net.loxal.soa.restkit.endpoint.AbstractEndpointTest
 import net.loxal.soa.restkit.model.whoami.Host
-import org.junit.Before
 import org.junit.Test
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
 import kotlin.test.assertEquals
 
 class WhoamiServiceIT : AbstractEndpointTest() {
-    @Before
-    public fun setUp() {
-        AbstractEndpointTest.resourcePath = WhoamiService.RESOURCE_PATH
-    }
-
     @Test
     public fun validateHost() {
         val response = AbstractEndpointTest.prepareGenericRequest(WhoamiService.RESOURCE_PATH).request().get()

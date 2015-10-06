@@ -7,27 +7,12 @@ package net.loxal.soa.restkit.endpoint
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import net.loxal.soa.restkit.App
-import net.loxal.soa.restkit.filter.AccessControlFilter
-import org.junit.Test
 import org.slf4j.LoggerFactory
 import java.net.URI
 import javax.ws.rs.client.ClientBuilder
 import javax.ws.rs.client.WebTarget
-import javax.ws.rs.core.MediaType
-import javax.ws.rs.core.Response
-import kotlin.test.assertEquals
 
 abstract class AbstractEndpointTest {
-
-    @Test
-    fun nonExistentPathNotFound() {
-        val response = prepareGenericRequest(resourcePath).path(NON_EXISTENT).request().get()
-        LOG.info("resourcePath: $resourcePath")
-
-        assertEquals(Response.Status.NOT_FOUND.statusCode, response.status)
-        assertEquals(MediaType.APPLICATION_JSON_TYPE, response.mediaType)
-        assureCorsHeaders(response)
-    }
 
     companion object {
         val LOG = LoggerFactory.getLogger(AbstractEndpointTest::class.java)
@@ -55,10 +40,5 @@ abstract class AbstractEndpointTest {
             mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
             client.register(mapper)
         }
-    }
-
-    private fun assureCorsHeaders(response: Response) {
-        assertEquals(AccessControlFilter.allowOriginHeaderValue, response.getHeaderString(AccessControlFilter.allowOriginHeader))
-        assertEquals(AccessControlFilter.allowHeadersValue.toString(), response.getHeaderString(AccessControlFilter.allowHeadersHeader).toString())
     }
 }

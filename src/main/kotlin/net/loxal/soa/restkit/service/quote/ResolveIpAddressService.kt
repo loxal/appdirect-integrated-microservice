@@ -25,7 +25,11 @@ import javax.ws.rs.core.Response
 class ResolveIpAddressService : Endpoint() {
 
     @GET
-    fun resolveIpAddress(@QueryParam(HOST_NAME_PARAM) hostName: String, @Context requestContext: ContainerRequestContext, @Suspended asyncResponse: AsyncResponse) {
+    fun resolveIpAddress(
+            @QueryParam(HOST_NAME_PARAM) hostName: String?,
+            @Context requestContext: ContainerRequestContext,
+            @Suspended asyncResponse: AsyncResponse
+    ) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
         try {

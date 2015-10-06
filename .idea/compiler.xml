@@ -33,7 +33,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="RESTkit" target="1.7" />
+      <module name="RESTkit" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
