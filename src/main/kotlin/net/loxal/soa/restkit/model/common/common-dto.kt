@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response
  * Detailed error message used in response to provide all errors triggered by a request.
  */
 data class ErrorMessage(
-        @NotNull val status: Response.Status = Response.Status.BAD_REQUEST
+        @NotNull val status: Response.Status
 ) {
     @NotNull
     val reasonPhrase: String = status.reasonPhrase

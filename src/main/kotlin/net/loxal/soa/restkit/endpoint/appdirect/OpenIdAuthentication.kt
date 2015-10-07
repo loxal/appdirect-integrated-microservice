@@ -57,8 +57,8 @@ class OpenIdAuthentication : Endpoint() {
     @Path("openid")
     @GET
     fun authenticate(
-            @QueryParam("url") url: URL,
-            @NotNull @QueryParam("returnToUrl") returnToUrl: URL,
+            @QueryParam("url") url: URL?,
+            @NotNull @QueryParam("returnToUrl") returnToUrl: URL?,
             @Suspended asyncResponse: AsyncResponse
     ) {
         val idDiscoveries = openIdConsumer.discover(url.toString())
