@@ -360,7 +360,7 @@
                     <space>${cf.space}</space>
                     <path>${project.build.directory}/${project.build.finalName}.war</path>
                     <instances>1</instances>
-                    <memory>512</memory>
+                    <memory>1024</memory>
                     <trustSelfSignedCerts>false</trustSelfSignedCerts>
                     <env>
                         <tenant>${tenant}</tenant>
