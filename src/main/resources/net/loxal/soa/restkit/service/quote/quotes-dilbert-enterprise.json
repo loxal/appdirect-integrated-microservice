@@ -62,5 +62,9 @@
   {
     "id": 16,
     "quote": "The corporate network configuration screws up your network setup so badly that most of your apps are broken, even after you disconnect."
+  },
+  {
+    "id": 17,
+    "quote": "Even Microsoft Office is installed in a custom way, via a corporate installation wrapper."
   }
 ]

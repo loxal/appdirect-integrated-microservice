@@ -8,6 +8,7 @@ import net.loxal.soa.restkit.endpoint.Endpoint
 import net.loxal.soa.restkit.endpoint.appdirect.dto.OpenIdInfo
 import net.loxal.soa.restkit.model.common.ErrorMessage
 import org.springframework.security.openid.OpenID4JavaConsumer
+import org.springframework.security.openid.OpenIDAuthenticationStatus
 import org.springframework.security.openid.OpenIDAuthenticationToken
 import org.springframework.security.openid.OpenIDConsumer
 import java.net.URI
@@ -33,12 +34,13 @@ class OpenIdAuthentication : Endpoint() {
         val token: OpenIDAuthenticationToken = openIdConsumer.endConsumption(req)
 
         Endpoint.LOG.info("openid.return_to: ${req.getParameter("openid.return_to")}")
-        if (token.identityUrl == null) {
-            asyncResponse.resume(Response.status(Response.Status.UNAUTHORIZED).entity(ErrorMessage(Response.Status.UNAUTHORIZED)).build())
-        } else {
+
+        if (OpenIDAuthenticationStatus.SUCCESS.equals(token.status)) {
             Endpoint.LOG.info("requestUri: ${req.requestURI}")
             val redirection = "${req.requestURL}/../$clientRedirectionPath?openid.id=${token.identityUrl}"
             asyncResponse.resume(Response.temporaryRedirect(URI.create(redirection)).build())
+        } else {
+            asyncResponse.resume(Response.status(Response.Status.UNAUTHORIZED).entity(ErrorMessage(Response.Status.UNAUTHORIZED)).build())
         }
     }
 

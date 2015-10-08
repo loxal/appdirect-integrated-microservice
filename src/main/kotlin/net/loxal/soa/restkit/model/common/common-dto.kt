@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response
  * Detailed error message used in response to provide all errors triggered by a request.
  */
 data class ErrorMessage(
-        @NotNull val status: Response.Status
+        @NotNull var status: Response.Status = Response.Status.BAD_REQUEST
 ) {
     @NotNull
     val reasonPhrase: String = status.reasonPhrase
@@ -22,7 +22,7 @@ data class ErrorMessage(
     @Max(value = 599)
     var statusCode: Int = status.statusCode
     var message: String? = ""
-    var moreInfo: String = ""
+    var moreInfo: String = "http://dilbert.com/assets/error-strip-dbb63fd118a5a7be2236f3474e7e65b8.jpg"
     var details: Set<ErrorDetail> = emptySet()
 }
 
