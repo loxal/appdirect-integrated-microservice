@@ -130,5 +130,9 @@
   {
     "id": 33,
     "quote": "It’s not enterprise when we do not use a multi-tier architecture and persist the data directly instead."
+  },
+  {
+    "id": 34,
+    "quote": "Let’s spend a day to estimate whether we can finish this by the end of this week."
   }
 ]

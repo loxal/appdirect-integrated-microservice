@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Run Servlet Container w/ enabled hot redeployment" type="MavenRunConfiguration" factoryName="Maven" singleton="true">
+  <configuration default="false" name="Run Jetty Servlet Container" type="MavenRunConfiguration" factoryName="Maven" singleton="true">
     <MavenSettings>
       <option name="myGeneralSettings" />
       <option name="myRunnerSettings">

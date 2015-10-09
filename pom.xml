@@ -22,9 +22,11 @@
 
     <properties>
         <tomcat.version>8.0.27</tomcat.version>
-        <jetty-maven-plugin.version>9.3.4.RC0</jetty-maven-plugin.version>
+        <jetty-maven-plugin.version>9.3.4.v20151007</jetty-maven-plugin.version>
         <jersey.version>2.22</jersey.version>
 
+        <cf.vpc>hybris.CloudFoundry</cf.vpc>
+        <cf.memory>1024</cf.memory>
         <cf.env.class>stage</cf.env.class>
         <cf.stage>v${parsedVersion.majorVersion}</cf.stage>
         <cf.org>core-${cf.env.class}</cf.org>
@@ -342,7 +344,7 @@
                 <artifactId>cf-maven-plugin</artifactId>
                 <version>1.1.3</version>
                 <configuration>
-                    <server>hybris.CloudFoundry</server>
+                    <server>${cf.vpc}</server>
                     <target>https://${cf.target}</target>
                     <buildpack>https://github.com/cloudfoundry/java-buildpack.git</buildpack>
                     <appname>
@@ -360,7 +362,7 @@
                     <space>${cf.space}</space>
                     <path>${project.build.directory}/${project.build.finalName}.war</path>
                     <instances>1</instances>
-                    <memory>1024</memory>
+                    <memory>${cf.memory}</memory>
                     <trustSelfSignedCerts>false</trustSelfSignedCerts>
                     <env>
                         <tenant>${tenant}</tenant>
@@ -392,6 +394,19 @@
             <id>local</id>
             <properties>
                 <deployment.host.port>${local.jetty.port}</deployment.host.port>
+            </properties>
+        </profile>
+        <profile>
+            <id>cf-pivotal</id>
+            <properties>
+                <cf.vpc>Cloud Foundry</cf.vpc>
+                <cf.memory>390</cf.memory>
+                <cf.org>loxal</cf.org>
+                <cf.space>production</cf.space>
+                <cf.target>api.run.pivotal.io</cf.target>
+                <cf.env.class>production</cf.env.class>
+                <cf.subdomain/>
+                <cf.domain.suffix>cfapps.io</cf.domain.suffix>
             </properties>
         </profile>
         <profile>
