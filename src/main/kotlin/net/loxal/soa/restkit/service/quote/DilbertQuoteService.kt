@@ -37,7 +37,7 @@ class DilbertQuoteService : Endpoint() {
     private fun fetchRandomQuote(asyncResponse: AsyncResponse, request: HttpServletRequest, requestContext: ContainerRequestContext, quotes: List<Quote>) {
         asyncResponse.setTimeout(Endpoint.ASYNC_RESPONSE_TIMEOUT.toLong(), TimeUnit.SECONDS)
 
-        val randomQuoteIndex = random.nextInt(quotes.size())
+        val randomQuoteIndex = random.nextInt(quotes.size)
         asyncResponse.resume(Response.ok(quotes[randomQuoteIndex]).build())
 
         LOG.info("${requestContext.method} for $randomQuoteIndex ${request.contextPath}")

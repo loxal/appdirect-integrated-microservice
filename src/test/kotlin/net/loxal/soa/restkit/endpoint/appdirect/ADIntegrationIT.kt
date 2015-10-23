@@ -63,7 +63,7 @@ class ADIntegrationIT {
             "Unassign" -> EventType.USER_UNASSIGNMENT
             else -> EventType.ADDON
         }
-        assertEquals(eventNameLookup.name(), result.message)
+        assertEquals(eventNameLookup.name, result.message)
     }
 
     @Test

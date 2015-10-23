@@ -50,7 +50,7 @@ class ADClient() {
             asyncResponse.resume(Response.ok(Result(
                     success = true,
                     accountIdentifier = accountIdentifier,
-                    message = eventType.name()
+                    message = eventType.name
             )).build())
         } else {
             // handle failure in a custom way

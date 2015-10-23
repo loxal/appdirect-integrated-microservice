@@ -40,7 +40,7 @@ class ResolveIpAddressService : Endpoint() {
 
             LOG.info(requestContext.method)
         } catch (e: UnknownHostException) {
-            val errorMsg = e.getMessage()
+            val errorMsg = e.message
             val errorMessage = ErrorMessage(Response.Status.INTERNAL_SERVER_ERROR)
             errorMessage.message = errorMsg
 
@@ -51,7 +51,7 @@ class ResolveIpAddressService : Endpoint() {
 
     companion object {
         const val HOST_NAME_PARAM: String = "hostName"
-        protected val LOG: Logger = LoggerFactory.getLogger(ResolveIpAddressService::class.java)
+        private val LOG: Logger = LoggerFactory.getLogger(ResolveIpAddressService::class.java)
         const val RESOURCE_PATH = "resolve-ip-address"
     }
 }

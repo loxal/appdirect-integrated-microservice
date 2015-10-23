@@ -26,7 +26,7 @@ class ResolveIpAddressServiceIT : AbstractEndpointTest() {
 
         val host = response.readEntity<Host>(Host::class.java)
         assertNotNull(host.address)
-        assertTrue(host.address.length() > 6 && host.address.length() < 20)
+        assertTrue(host.address.length > 6 && host.address.length < 20)
         assertEquals(hostName, host.name)
     }
 }

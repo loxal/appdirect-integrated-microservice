@@ -73,7 +73,7 @@ class GroupResourceIT : AbstractEndpointTest() {
         assertEquals(Response.Status.OK.statusCode.toLong(), retrieval.status.toLong())
         assertEquals(MediaType.APPLICATION_JSON_TYPE, retrieval.mediaType)
         val retrievedEntity = retrieval.readEntity<Group>(Group::class.java)
-        assertEquals(ENTRIES.size().toLong(), retrievedEntity.entityReferences.size().toLong())
+        assertEquals(ENTRIES.size.toLong(), retrievedEntity.entityReferences.size.toLong())
         assertEquals(false, retrievedEntity.entityReferences.isEmpty())
     }
 
@@ -109,7 +109,7 @@ class GroupResourceIT : AbstractEndpointTest() {
         val retrievedUpdatedEntity = AbstractEndpointTest.prepareTarget(existingEntity.location).request().get()
         val updatedEntity = retrievedUpdatedEntity.readEntity<Group>(Group::class.java)
         assertEquals(updatedField, updatedEntity.name)
-        assertEquals(entries.size().toLong(), updatedEntity.entityReferences.size().toLong())
+        assertEquals(entries.size.toLong(), updatedEntity.entityReferences.size.toLong())
         assertEquals(entries, updatedEntity.entityReferences)
     }
 

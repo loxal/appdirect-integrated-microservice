@@ -25,8 +25,8 @@ class ErrorStatusCodeMapper : ExceptionMapper<WebApplicationException> {
 
         val errorMessage = ErrorMessage(status)
         errorMessage.statusCode = status.statusCode
-        errorMessage.message = exception.getMessage()
-        errorMessage.moreInfo = status.family.name()
+        errorMessage.message = exception.message
+        errorMessage.moreInfo = status.family.name
 
         return Response.status(status.statusCode).entity(errorMessage).type(MediaType.APPLICATION_JSON_TYPE).build()
     }
