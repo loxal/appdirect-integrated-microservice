@@ -98,7 +98,7 @@ class GroupResourceIT : AbstractEndpointTest() {
         val existingEntity = postEntity()
 
         val updatedField = "updated field"
-        val entries = Arrays.asList<String>("first", "second")
+        val entries: List<String> = Arrays.asList<String>("first", "second")
         val modifiedEntity = Group(updatedField, entries)
 
         val update = AbstractEndpointTest.prepareTarget(existingEntity.location).request().put(Entity.json<Group>(modifiedEntity))

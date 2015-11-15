@@ -119,7 +119,7 @@ class PollResourceIT : AbstractEndpointTest() {
 
     companion object {
         private val POLL_QUESTION = "What is the meaning of life?"
-        private val POLL_ANSWERS = Arrays.asList<String>("Yes", "No")
+        private val POLL_ANSWERS: List<String> = Arrays.asList<String>("Yes", "No")
 
         fun createEntity(id: String = UUID.randomUUID().toString(), poll: Poll = Poll(POLL_QUESTION, POLL_ANSWERS)): Response {
             val createdPoll = AbstractEndpointTest.prepareGenericRequest(PollResource.RESOURCE_PATH)
