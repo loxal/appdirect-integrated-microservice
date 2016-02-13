@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.service.quote
@@ -12,8 +12,7 @@ import javax.ws.rs.core.Response
 import kotlin.test.assertEquals
 
 class WhoamiServiceIT : AbstractEndpointTest() {
-    @Test
-    public fun validateHost() {
+    @Test fun validateHost() {
         val response = AbstractEndpointTest.prepareGenericRequest(WhoamiService.RESOURCE_PATH).request().get()
 
         assertEquals(Response.Status.OK.statusCode.toLong(), response.status.toLong())

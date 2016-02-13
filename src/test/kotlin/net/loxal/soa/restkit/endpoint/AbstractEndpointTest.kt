@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.endpoint
@@ -22,15 +22,15 @@ abstract class AbstractEndpointTest {
         private val mapper = ObjectMapper()
         var resourcePath: String = "/"
 
-        public fun prepareGenericRequest(path: String): WebTarget {
+        fun prepareGenericRequest(path: String): WebTarget {
             return prepareTarget(SERVICE_TARGET).path(path)
         }
 
-        public fun prepareTarget(target: String): WebTarget {
+        fun prepareTarget(target: String): WebTarget {
             return client.target(target)
         }
 
-        public fun prepareTarget(target: URI): WebTarget {
+        fun prepareTarget(target: URI): WebTarget {
             return client.target(target)
         }
 

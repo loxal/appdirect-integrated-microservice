@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.endpoint
@@ -30,8 +30,7 @@ class GroupResourceIT : AbstractEndpointTest() {
         return createdEntity
     }
 
-    @Test
-    public fun createEntity() {
+    @Test fun createEntity() {
         val response = postEntity()
 
         assertEquals(Response.Status.CREATED.statusCode.toLong(), response.status.toLong())
@@ -42,8 +41,7 @@ class GroupResourceIT : AbstractEndpointTest() {
         assertEquals(false, response.location.schemeSpecificPart.endsWith(GroupResource.RESOURCE_PATH))
     }
 
-    @Test
-    public fun deleteNonExistentEntity() {
+    @Test fun deleteNonExistentEntity() {
         val existingEntity = postEntity()
 
         val deletion = AbstractEndpointTest.prepareTarget("${existingEntity.location} ${AbstractEndpointTest.NON_EXISTENT}").request().delete()
@@ -54,8 +52,7 @@ class GroupResourceIT : AbstractEndpointTest() {
         validateError(deletion)
     }
 
-    @Test
-    public fun deleteExistingEntity() {
+    @Test fun deleteExistingEntity() {
         val existingEntity = postEntity()
 
         val deletion = AbstractEndpointTest.prepareTarget(existingEntity.location).request().delete()
@@ -64,8 +61,7 @@ class GroupResourceIT : AbstractEndpointTest() {
         assertEquals(MediaType.APPLICATION_JSON_TYPE, deletion.mediaType)
     }
 
-    @Test
-    public fun retrieveExistingEntity() {
+    @Test fun retrieveExistingEntity() {
         val existingEntity = postEntity()
 
         val retrieval = AbstractEndpointTest.prepareTarget(existingEntity.location).request().get()
@@ -77,8 +73,7 @@ class GroupResourceIT : AbstractEndpointTest() {
         assertEquals(false, retrievedEntity.entityReferences.isEmpty())
     }
 
-    @Test
-    public fun retrieveNonExistentEntity() {
+    @Test fun retrieveNonExistentEntity() {
         val existingEntity = postEntity()
 
         val retrieval = AbstractEndpointTest.prepareTarget("${existingEntity.location} ${AbstractEndpointTest.NON_EXISTENT}").request().get()
@@ -93,8 +88,7 @@ class GroupResourceIT : AbstractEndpointTest() {
         assertEquals(Response.Status.BAD_REQUEST.reasonPhrase, notFoundError.reasonPhrase)
     }
 
-    @Test
-    public fun updateExistingEntity() {
+    @Test fun updateExistingEntity() {
         val existingEntity = postEntity()
 
         val updatedField = "updated field"
@@ -113,8 +107,7 @@ class GroupResourceIT : AbstractEndpointTest() {
         assertEquals(entries, updatedEntity.entityReferences)
     }
 
-    @Test
-    public fun updateNonExistentEntity() {
+    @Test fun updateNonExistentEntity() {
         val existingEntity = postEntity()
 
         val someEntity = Group("Irrelevant", listOf<String>())

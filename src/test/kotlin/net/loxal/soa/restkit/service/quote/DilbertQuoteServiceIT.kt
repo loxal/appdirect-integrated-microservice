@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.service.quote
@@ -18,26 +18,20 @@ class DilbertQuoteServiceIT : AbstractEndpointTest() {
     private val RESOURCE_PATH_MANAGER = "${DilbertQuoteService.RESOURCE_PATH}/${DilbertQuoteService.RESOURCE_PATH_MANAGER}"
     private val RESOURCE_PATH_ENTERPRISE = "${DilbertQuoteService.RESOURCE_PATH}/${DilbertQuoteService.RESOURCE_PATH_ENTERPRISE}"
 
-    @Test
-    public fun getEnterpriseQuote(): Unit = retrieveSingleQuote(RESOURCE_PATH_ENTERPRISE)
+    @Test fun getEnterpriseQuote(): Unit = retrieveSingleQuote(RESOURCE_PATH_ENTERPRISE)
 
-    @Test
-    public fun getEnterpriseQuoteViaId(): Unit =
+    @Test fun getEnterpriseQuoteViaId(): Unit =
             retrieveSpecificQuote(resource = RESOURCE_PATH_ENTERPRISE, quotes = DilbertQuoteService.quotesEnterprise)
 
-    @Test
-    public fun getProgrammerQuote(): Unit = retrieveSingleQuote(RESOURCE_PATH_PROGRAMMER)
+    @Test fun getProgrammerQuote(): Unit = retrieveSingleQuote(RESOURCE_PATH_PROGRAMMER)
 
-    @Test
-    public fun getProgrammerQuoteViaId(): Unit =
+    @Test fun getProgrammerQuoteViaId(): Unit =
             retrieveSpecificQuote(resource = RESOURCE_PATH_PROGRAMMER, quotes = DilbertQuoteService.quotesProgrammer)
 
-    @Test
-    public fun getManagerQuote(): Unit = retrieveSingleQuote(RESOURCE_PATH_MANAGER)
+    @Test fun getManagerQuote(): Unit = retrieveSingleQuote(RESOURCE_PATH_MANAGER)
 
 
-    @Test
-    public fun getManagerQuoteViaId(): Unit =
+    @Test fun getManagerQuoteViaId(): Unit =
             retrieveSpecificQuote(resource = RESOURCE_PATH_MANAGER, quotes = DilbertQuoteService.quotesManager)
 
     private fun retrieveSingleQuote(resource: String) {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-  ~ Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+  ~ Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
   -->
 
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
@@ -9,14 +9,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>net.loxal</groupId>
-        <artifactId>meta</artifactId>
-        <version>1.2.18</version>
+        <artifactId>blueprint</artifactId>
+        <version>1.0.4</version>
     </parent>
 
     <groupId>net.loxal.soa</groupId>
-    <artifactId>rest-kit</artifactId>
-    <version>1.5.5-SNAPSHOT</version>
-    <name>RESTkit</name>
+    <artifactId>rest-kit-app-direct</artifactId>
+    <version>1.5.6-SNAPSHOT</version>
+    <name>RESTkit AppDirect</name>
     <packaging>war</packaging>
     <description>Microservice Toolkit</description>
 
@@ -83,6 +83,10 @@
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-test</artifactId>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.ext</groupId>

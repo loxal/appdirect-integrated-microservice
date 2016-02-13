@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.endpoint.ballot
@@ -82,6 +82,6 @@ class PollResource : Endpoint() {
 
     companion object {
         private const val RESOURCE_NAME = "poll"
-        public const val RESOURCE_PATH: String = "ballot/" + RESOURCE_NAME
+        const val RESOURCE_PATH: String = "ballot/" + RESOURCE_NAME
     }
 }

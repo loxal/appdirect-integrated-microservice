@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.endpoint.ballot
@@ -28,8 +28,7 @@ class PollResourceIT : AbstractEndpointTest() {
         assertEquals(false, response.location.schemeSpecificPart.endsWith(PollResource.RESOURCE_PATH))
     }
 
-    @Test
-    public fun deleteNonExistentPoll() {
+    @Test fun deleteNonExistentPoll() {
         val existingEntity = createEntity()
 
         val response = AbstractEndpointTest.prepareTarget("${existingEntity.location} ${AbstractEndpointTest.NON_EXISTENT}").request().delete()
@@ -41,8 +40,7 @@ class PollResourceIT : AbstractEndpointTest() {
         assertEquals(Response.Status.BAD_REQUEST.reasonPhrase, errorMessage.reasonPhrase)
     }
 
-    @Test
-    public fun deleteExistingPoll() {
+    @Test fun deleteExistingPoll() {
         val existingPoll = createEntity()
 
         val deletion = AbstractEndpointTest.prepareTarget(existingPoll.location).request().delete()
@@ -51,8 +49,7 @@ class PollResourceIT : AbstractEndpointTest() {
         assertEquals(MediaType.APPLICATION_JSON_TYPE, deletion.mediaType)
     }
 
-    @Test
-    public fun retrieveExistingPoll() {
+    @Test fun retrieveExistingPoll() {
         val existingPoll = createEntity()
 
         val retrieval = AbstractEndpointTest.prepareTarget(existingPoll.location).request().get()
@@ -67,8 +64,7 @@ class PollResourceIT : AbstractEndpointTest() {
         assertEquals("No", retrievedPoll.answers.get(1))
     }
 
-    @Test
-    public fun retrieveNonExistentPoll() {
+    @Test fun retrieveNonExistentPoll() {
         val existingEntity = createEntity()
 
         val retrieval = AbstractEndpointTest.prepareTarget("${existingEntity.location} ${AbstractEndpointTest.NON_EXISTENT}").request().get()
@@ -80,8 +76,7 @@ class PollResourceIT : AbstractEndpointTest() {
         assertEquals(Response.Status.BAD_REQUEST.reasonPhrase, notFoundError.reasonPhrase)
     }
 
-    @Test
-    public fun updateExistingPoll() {
+    @Test fun updateExistingPoll() {
         val existingPoll = createEntity()
 
         val newQuestion = "Does it work?"
@@ -106,8 +101,7 @@ class PollResourceIT : AbstractEndpointTest() {
         assertEquals(thirdAnswerOption, updatedPoll.answers.get(2))
     }
 
-    @Test
-    public fun updateNonExistentPoll() {
+    @Test fun updateNonExistentPoll() {
         val existingEntity = createEntity()
 
         val somePoll = Poll("Irrelevant", listOf<String>())

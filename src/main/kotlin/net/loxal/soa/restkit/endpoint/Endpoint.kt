@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.endpoint
@@ -10,7 +10,7 @@ import java.util.regex.Pattern
 
 abstract class Endpoint protected constructor() {
     companion object {
-        public val URI_PATH_SEPARATOR: String = "/"
+        val URI_PATH_SEPARATOR: String = "/"
         const val ASYNC_RESPONSE_TIMEOUT: Int = 3
         const val ID_PATH_PARAM: String = "id"
         const val ID_PATH_PARAM_PLACEHOLDER: String = "{$ID_PATH_PARAM}"

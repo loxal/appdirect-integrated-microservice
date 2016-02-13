@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.endpoint
@@ -80,6 +80,6 @@ class GroupResource : Endpoint() {
     }
 
     companion object {
-        public const val RESOURCE_PATH: String = "group"
+        const val RESOURCE_PATH: String = "group"
     }
 }

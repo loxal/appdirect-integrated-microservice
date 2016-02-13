@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.service.quote
@@ -15,8 +15,7 @@ import kotlin.test.assertTrue
 
 class ResolveIpAddressServiceIT : AbstractEndpointTest() {
 
-    @Test
-    public fun assureHostAddress() {
+    @Test fun assureHostAddress() {
         val hostName = "localhost"
 
         val response = AbstractEndpointTest.prepareGenericRequest(ResolveIpAddressService.RESOURCE_PATH).queryParam(ResolveIpAddressService.HOST_NAME_PARAM, hostName).request().get()

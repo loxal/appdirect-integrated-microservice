@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.client
@@ -10,8 +10,7 @@ import kotlin.test.assertEquals
 
 class RepositoryClientIT : AbstractEndpointTest() {
 
-    @Test
-    public fun retrieveToken() {
+    @Test fun retrieveToken() {
         val token = KitClient.authorize()
 
         assertEquals(36, token.access_token.length)
