@@ -15,7 +15,8 @@
 
 [Support this work with cryptocurrencies like BitCoin!](http://me.loxal.net/coin-support.html)
 
-# Services & Endpoints
+Services & Endpoints
+=
 
 ## Quotation Endpoint
 * Browser client: `/dilbert-quote/index.html`

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-  ~ Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+  ~ Copyright 2017 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
   -->
 
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
@@ -16,7 +16,7 @@
     <groupId>net.loxal.soa</groupId>
     <artifactId>rest-kit-app-direct</artifactId>
     <version>1.5.6-SNAPSHOT</version>
-    <name>RESTkit AppDirect</name>
+    <name>AppDirect Integration</name>
     <packaging>war</packaging>
     <description>Microservice Toolkit</description>
 
