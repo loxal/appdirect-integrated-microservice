@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2017 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.mapper
@@ -18,7 +18,7 @@ import javax.ws.rs.ext.Provider
 @Provider
 class ErrorStatusCodeMapper : ExceptionMapper<WebApplicationException> {
     override fun toResponse(exception: WebApplicationException): Response {
-        var status: Response.Status? = EXCEPTION_TO_ERROR_MAPPING.get(exception.javaClass)
+        var status: Response.Status? = EXCEPTION_TO_ERROR_MAPPING[exception.javaClass]
         if (status == null) {
             status = Response.Status.BAD_REQUEST
         }

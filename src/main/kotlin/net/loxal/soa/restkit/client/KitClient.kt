@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2017 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.client
@@ -15,7 +15,7 @@ import javax.ws.rs.client.WebTarget
 import javax.ws.rs.core.Form
 import javax.ws.rs.core.MultivaluedHashMap
 
-class KitClient<T> : AbstractKitClient<T>() {
+class KitClient<out T> : AbstractKitClient<T>() {
 
     override fun post(entity: Entity<in T>, id: String) =
             authorizeRequest(targetProxy(explicitType(entity)).path(id)).post(entity)
@@ -57,7 +57,7 @@ class KitClient<T> : AbstractKitClient<T>() {
             authorization = authorize()
         }
 
-        private final fun refreshToken() = Runnable {
+        private fun refreshToken() = Runnable {
             val newAuthorization: Authorization
             newAuthorization = authorize()
             authorization = newAuthorization
@@ -65,7 +65,7 @@ class KitClient<T> : AbstractKitClient<T>() {
             AbstractKitClient.LOG.info("A new bearer token ${authorization.access_token} has been fetched.")
         }
 
-        final fun authorize(): Authorization {
+        fun authorize(): Authorization {
             val tokenRequestBody = MultivaluedHashMap<String, String>()
             tokenRequestBody.putSingle("grant_type", "client_credentials")
             tokenRequestBody.putSingle("scope", "hybris.document_manage hybris.document_view")

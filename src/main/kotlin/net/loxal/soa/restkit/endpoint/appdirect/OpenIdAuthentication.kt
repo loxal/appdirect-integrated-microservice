@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2017 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.endpoint.appdirect
@@ -35,7 +35,7 @@ class OpenIdAuthentication : Endpoint() {
 
         Endpoint.LOG.info("openid.return_to: ${req.getParameter("openid.return_to")}")
 
-        if (OpenIDAuthenticationStatus.SUCCESS.equals(token.status)) {
+        if (OpenIDAuthenticationStatus.SUCCESS == token.status) {
             Endpoint.LOG.info("requestUri: ${req.requestURI}")
             val redirection = "${req.requestURL}/../$clientRedirectionPath?openid.id=${token.identityUrl}"
             asyncResponse.resume(Response.temporaryRedirect(URI.create(redirection)).build())

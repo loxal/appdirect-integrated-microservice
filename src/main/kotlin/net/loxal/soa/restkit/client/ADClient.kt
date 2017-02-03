@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2017 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.client
@@ -21,14 +21,14 @@ import javax.ws.rs.core.Response
 /**
  * AppDirect client
  */
-class ADClient() {
+class ADClient {
 
     private fun fetchEvent(uri: URI? = URI.create("")): Response {
         val signedUrl = oAuthConsumer.sign(uri.toString())
 
         val fetchedEvent = CLIENT.target(signedUrl).request().get()
 
-        if (Response.Status.Family.SUCCESSFUL.equals(fetchedEvent.statusInfo.family)) {
+        if (Response.Status.Family.SUCCESSFUL == fetchedEvent.statusInfo.family) {
             return fetchedEvent
         } else {
             val error = fetchedEvent.readEntity(ADError::class.java)
@@ -41,8 +41,8 @@ class ADClient() {
     fun handleAppDirectEvent(asyncResponse: AsyncResponse, eventUrl: URL?, eventType: EventType) {
         val fetchedEvent: Response = fetchEvent(eventUrl?.toURI())
 
-        if (Response.Status.Family.SUCCESSFUL.equals(fetchedEvent.statusInfo.family)) {
-            val appDirectEvent = fetchedEvent.readEntity(Event::class.java);
+        if (Response.Status.Family.SUCCESSFUL == fetchedEvent.statusInfo.family) {
+            val appDirectEvent = fetchedEvent.readEntity(Event::class.java)
             val accountIdentifier: String? = appDirectEvent.creator?.uuid
 
             LOG.info("$appDirectEvent")

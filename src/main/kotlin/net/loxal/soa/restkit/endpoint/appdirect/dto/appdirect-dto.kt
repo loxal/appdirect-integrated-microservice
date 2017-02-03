@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2017 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.endpoint.appdirect.dto
@@ -103,20 +103,20 @@ enum class ErrorCode {
 
 enum class EventType {
     SUBSCRIPTION_ORDER {
-        override final fun toString() = "Order"
+        override fun toString() = "Order"
     },
     SUBSCRIPTION_CHANGE {
-        override final fun toString() = "Change"
+        override fun toString() = "Change"
     },
     SUBSCRIPTION_CANCEL {
-        override final fun toString() = "Cancel"
+        override fun toString() = "Cancel"
     },
     SUBSCRIPTION_NOTICE,
     USER_ASSIGNMENT {
-        override final fun toString() = "Assign"
+        override fun toString() = "Assign"
     },
     USER_UNASSIGNMENT {
-        override final fun toString() = "Unassign"
+        override fun toString() = "Unassign"
     },
 
     ADDON,
