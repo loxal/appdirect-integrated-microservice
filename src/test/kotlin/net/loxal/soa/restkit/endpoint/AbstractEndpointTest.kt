@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2017 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.endpoint
@@ -17,7 +17,7 @@ abstract class AbstractEndpointTest {
     companion object {
         val LOG = LoggerFactory.getLogger(AbstractEndpointTest::class.java)
         val NON_EXISTENT: String = "non-existent"
-        val SERVICE_TARGET: String
+        val SERVICE_TARGET: String = App.PROPERTIES.getProperty("deploymentTarget")
         private val client = ClientBuilder.newClient()
         private val mapper = ObjectMapper()
         var resourcePath: String = "/"
@@ -35,7 +35,6 @@ abstract class AbstractEndpointTest {
         }
 
         init {
-            SERVICE_TARGET = App.PROPERTIES.getProperty("deploymentTarget")
 
             mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
             client.register(mapper)

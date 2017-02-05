@@ -63,16 +63,14 @@ class ADClient {
 
 
     companion object {
-        private val consumerKey: String
-        private val consumerSecret: String
+        private val consumerKey: String = App.PROPERTIES.getProperty("appdirect.oauth.consumer.key")
+        private val consumerSecret: String = App.PROPERTIES.getProperty("appdirect.oauth.consumer.secret")
 
         private val LOG = LoggerFactory.getLogger(ADClient::class.java)
         private val CLIENT = ClientBuilder.newClient()
         private val oAuthConsumer: OAuthConsumer
 
         init {
-            consumerKey = App.PROPERTIES.getProperty("appdirect.oauth.consumer.key")
-            consumerSecret = App.PROPERTIES.getProperty("appdirect.oauth.consumer.secret")
             oAuthConsumer = DefaultOAuthConsumer(consumerKey, consumerSecret)
         }
     }

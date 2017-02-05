@@ -39,27 +39,22 @@ class KitClient<out T> : AbstractKitClient<T>() {
     private fun explicitType(entity: Class<in T>) = entity.simpleName.toLowerCase()
 
     companion object {
-        val appId: String
-        val clientId: String
+        val appId: String = App.PROPERTIES.getProperty("appId")
+        val clientId: String = App.PROPERTIES.getProperty("app.clientId")
         const val INFIX_PATH: String = "data"
         var authorization: Authorization
         private val tokenRefresher: ScheduledExecutorService = Executors.newScheduledThreadPool(1)
-        val repositoryServiceProxyUrl: URI
-        val tenant: String
+        val repositoryServiceProxyUrl: URI = URI.create(App.PROPERTIES.getProperty("repositoryServiceProxyUrl"))
+        val tenant: String = App.PROPERTIES.getProperty("tenant")
 
         init {
-            clientId = App.PROPERTIES.getProperty("app.clientId")
-            appId = App.PROPERTIES.getProperty("appId")
-            tenant = App.PROPERTIES.getProperty("tenant")
-            repositoryServiceProxyUrl = URI.create(App.PROPERTIES.getProperty("repositoryServiceProxyUrl"))
 
             tokenRefresher.scheduleAtFixedRate(refreshToken(), 0, 3500, TimeUnit.SECONDS)
             authorization = authorize()
         }
 
         private fun refreshToken() = Runnable {
-            val newAuthorization: Authorization
-            newAuthorization = authorize()
+            val newAuthorization: Authorization = authorize()
             authorization = newAuthorization
 
             AbstractKitClient.LOG.info("A new bearer token ${authorization.access_token} has been fetched.")
