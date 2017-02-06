@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="RESTkit:war exploded">
+  <artifact type="exploded-war" name="AppDirect Integration:war exploded">
     <output-path>$PROJECT_DIR$/target/rest-kit-app-direct-1.6.0</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">

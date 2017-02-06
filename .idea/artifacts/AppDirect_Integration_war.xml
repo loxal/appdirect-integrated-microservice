@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="AppDirect Integration:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="rest-kit-app-direct-1.6.0.war">
+      <element id="artifact" artifact-name="AppDirect Integration:war exploded" />
+    </root>
+  </artifact>
+</component>

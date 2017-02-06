@@ -1,14 +1,12 @@
 /*
- * Copyright 2015 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
+ * Copyright 2017 Alexander Orlov <alexander.orlov@loxal.net>. All rights reserved.
  */
 
 package net.loxal.soa.restkit.client
 
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import javax.ws.rs.client.ClientBuilder
-import javax.ws.rs.client.Entity
-import javax.ws.rs.client.Invocation
-import javax.ws.rs.client.WebTarget
+import javax.ws.rs.client.*
 import javax.ws.rs.core.HttpHeaders
 import javax.ws.rs.core.Response
 
@@ -29,7 +27,7 @@ abstract class AbstractKitClient<out T> protected constructor() {
     abstract fun put(json: Entity<in T>, id: String): Response
 
     companion object {
-        val LOG = LoggerFactory.getLogger(AbstractKitClient::class.java)
-        val CLIENT = ClientBuilder.newClient()
+        val LOG: Logger = LoggerFactory.getLogger(AbstractKitClient::class.java)
+        val CLIENT: Client = ClientBuilder.newClient()
     }
 }

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AppDirect Integration.iml" filepath="$PROJECT_DIR$/AppDirect Integration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/appdirect-integrated-microservice.iml" filepath="$PROJECT_DIR$/appdirect-integrated-microservice.iml" />
     </modules>
   </component>
 </project>
