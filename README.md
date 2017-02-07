@@ -18,17 +18,9 @@
 Services & Endpoints
 =
 
-## Quotation Endpoint
-* Browser client: `/dilbert-quote/index.html`
-* Endpoint for enterprise environment working condition quotations: `/dilbert-quote/enterprise`
-* Endpoint for manager quotations: `/dilbert-quote/manager`
-* Endpoint for programmer quotations: `/dilbert-quote/programmer`
+## Endpoint
 * OpenID 2.0 authentication: `/play/ground.html`
 
-## Who am I
-
-* /who-am-i:
-    * Retrieves the IP address of the requesting host
 
 ## Getting Started
 

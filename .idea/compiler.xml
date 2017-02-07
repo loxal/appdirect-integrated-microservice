@@ -17,12 +17,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="AppDirect Integration" />
+        <module name="appdirect-integrated-microservice" />
         <module name="rest-kit" />
         <module name="RESTkit" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="AppDirect Integration" target="1.8" />
+      <module name="appdirect-integrated-microservice" target="1.8" />
       <module name="RESTkit" target="1.8" />
     </bytecodeTargetLevel>
   </component>
