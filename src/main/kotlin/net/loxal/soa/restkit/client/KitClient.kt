@@ -14,19 +14,20 @@ import javax.ws.rs.client.Entity
 import javax.ws.rs.client.WebTarget
 import javax.ws.rs.core.Form
 import javax.ws.rs.core.MultivaluedHashMap
+import javax.ws.rs.core.Response
 
 class KitClient<out T> : AbstractKitClient<T>() {
 
-    override fun post(entity: Entity<in T>, id: String) =
+    override fun post(entity: Entity<in T>, id: String): Response =
             authorizeRequest(targetProxy(explicitType(entity)).path(id)).post(entity)
 
-    override fun put(json: Entity<in T>, id: String) =
+    override fun put(json: Entity<in T>, id: String): Response =
             authorizeRequest(targetProxy(explicitType(json)).path(id)).put(json)
 
-    override fun delete(entityType: Class<in T>, id: String) =
+    override fun delete(entityType: Class<in T>, id: String): Response =
             authorizeRequest(targetProxy(explicitType(entityType)).path(id)).delete()
 
-    override fun get(entityType: Class<in T>, id: String) =
+    override fun get(entityType: Class<in T>, id: String): Response =
             authorizeRequest(targetProxy(explicitType(entityType)).path(id)).get()
 
     private fun targetProxy(entityType: String): WebTarget {
