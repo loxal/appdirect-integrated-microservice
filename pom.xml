@@ -21,7 +21,7 @@
     <description>Microservice Toolkit</description>
 
     <properties>
-        <tomcat.version>8.0.28</tomcat.version>
+        <tomcat.version>9.0.0.M17</tomcat.version>
         <jetty-maven-plugin.version>9.4.1.v20170120</jetty-maven-plugin.version>
         <jersey.version>2.25.1</jersey.version>
 
@@ -174,10 +174,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.18.1</version>
+                <version>2.19.1</version>
                 <configuration>
                     <includes>
-                        <include>**/*IT.java</include>
+                        <include>**/*</include>
                     </includes>
                 </configuration>
                 <executions>
@@ -192,7 +192,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.3</version>
+                <version>3.6.1</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
